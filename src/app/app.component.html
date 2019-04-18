@@ -1,6 +1,6 @@
 <ion-app>
   <ion-split-pane>
-    <ion-menu>
+    <ion-menu *ngIf="afAuth.auth.currentUser">
       <ion-header>
         <ion-toolbar>
           <ion-title>Menu</ion-title>
@@ -16,9 +16,18 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item (click)="signOut()">
+              <ion-icon slot="start" name="log-out"></ion-icon>
+              <ion-label *ngIf="afAuth.auth.currentUser">
+                Sign Out
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
         </ion-list>
       </ion-content>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>
   </ion-split-pane>
 </ion-app>
+

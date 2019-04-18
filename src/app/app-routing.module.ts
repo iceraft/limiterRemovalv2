@@ -4,8 +4,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
 	{ path: '', redirectTo: 'workout', pathMatch: 'full' },
 	{ path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
-	{ path: 'profile/edit', loadChildren: './pages/profile/profile-edit/profile-edit.module#ProfileEditPageModule' },
-	{ path: 'profile/:id/edit', loadChildren: './pages/profile/profile-edit/profile-edit.module#ProfileEditPageModule' },
 	{ path: 'workout', loadChildren: './pages/workout/workout.module#WorkoutPageModule' },
 	{ path: 'workout/add', loadChildren: './pages/workout/workout-add/workout-add.module#WorkoutAddPageModule' },
 	{ path: 'workout/:id', loadChildren: './pages/workout/workout.module#WorkoutPageModule' },

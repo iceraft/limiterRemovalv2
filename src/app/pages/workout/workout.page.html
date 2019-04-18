@@ -1,14 +1,69 @@
 <ion-header>
-<ion-toolbar color="dark">
-	<ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      Workout
-    </ion-title>
+	<ion-toolbar color="dark">
+		<ion-buttons slot="start">
+	      <ion-menu-button></ion-menu-button>
+	    </ion-buttons>
+	    <ng-container *ngIf="afAuth.auth.currentUser;">
+	    <ion-title>
+	      Workout
+	    </ion-title>
+		</ng-container>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+	<firebase-ui></firebase-ui>
+	<div *ngIf="afAuth.auth.currentUser">
+	<div>
+	<ion-toolbar>
+	<ion-title>Your Workouts</ion-title>	
+	  <ion-buttons (click)="add()" slot="end">
+    	<ion-icon slot="icon-only" name="add"></ion-icon>
+	  </ion-buttons>
+	</ion-toolbar>
+ <!--  <div *ngFor="let regiment of regiments">
+    <ion-item *ngIf="regiment.createdBy == afAuth.auth.currentUser.email">
+      <table>
+        <tr>
+          <th><h2> &nbsp;&nbsp;</h2></th>
+          <td><table>
+            <tr>
+              <td>{{regiment.createdBy}}</td>
+            </tr>
+            <tr>
+              <td><sub>{{regiment.session}}</sub></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </ion-item>
+  </div> -->
+	</div>
+    <br>
+    <br>
+	<div>
+	<ion-toolbar>
+	<ion-title>Other Workouts</ion-title>	
+  <!-- <div *ngFor="let regiment of regiments">
+    <ion-item>
+      <table>
+        <tr>
+          <th><h2> &nbsp;&nbsp;</h2></th>
+          <td><table>
+            <tr>
+              <td>{{regiment.createdBy}}</td>
+            </tr>
+            <tr>
+              <td><sub>{{regiment.session}}</sub></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </ion-item>
+  </div> -->
+	</ion-toolbar>
+	</div>
+	</div>
 </ion-content>

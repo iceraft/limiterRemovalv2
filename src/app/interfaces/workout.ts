@@ -1,4 +1,4 @@
-export interface Workouts {
+export interface Workout {
 	workoutCreatedBy: string,
 	workoutTitle: string,
 	workoutList: [],

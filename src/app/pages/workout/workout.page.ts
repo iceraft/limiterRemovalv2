@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ModalController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-workout',
@@ -7,7 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WorkoutPage implements OnInit {
 
-  constructor() { }
+  constructor(private db: AngularFirestore,
+              private mc: ModalController,
+              public afAuth: AngularFireAuth,) { }
 
   ngOnInit() {
   }

@@ -12,8 +12,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+
+import { FirebaseUIModule, firebase, firebaseui } from 'firebaseui-angular';
+
 import { environment } from '../environments/environment';
 
+import { ProfileEditPageModule } from './pages/profile/profile-edit/profile-edit.module';
+
+
+const firebaseUiAuthConfig: firebaseui.auth.Config = {
+  signInFlow: 'popup',
+  signInOptions: [
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+  ],
+  tosUrl: '',
+  privacyPolicyUrl: '',
+  credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +38,11 @@ import { environment } from '../environments/environment';
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.fbConfg),
-    AngularFirestoreModule,],
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+    ProfileEditPageModule,
+    ],
   providers: [
     StatusBar,
     SplashScreen,

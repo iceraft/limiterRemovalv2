@@ -1,10 +1,9 @@
-export interface Profiles {
-	profileID: string,
+export interface Profile {
 	profileAlias: string,
 	profileGender: boolean,
 	profileWeight: number,
 	profileHeight: number,
 	profileTotalCalory: number,
-	profileJoinSince: Date,
+	profileJoinSince: number,
 	profileFriends: [],
 }

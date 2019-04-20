@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
-// import { ActivatedRoute } from '@angular/router';
-import { LoadingController, ModalController,
-		 // NavController,
-		  } from '@ionic/angular';
+import { AngularFirestore } from '@angular/fire/firestore';;
+import { LoadingController, ModalController, } from '@ionic/angular';
 import { Profile } from '../../interfaces/profile';
 import { ProfileService } from '../../services/profile.service';
 import { ProfileEditPage } from './profile-edit/profile-edit.page';
@@ -33,9 +30,7 @@ export class ProfilePage implements OnInit {
   constructor( public afAuth: AngularFireAuth,
   			   public db: AngularFirestore,
   			   private profileService: ProfileService,
-  			   // private route: ActivatedRoute,
   			   private loadingController: LoadingController,
-  			   // private nav: NavController,
   			   private modalCtrl: ModalController,	
   			   ) { 
   	

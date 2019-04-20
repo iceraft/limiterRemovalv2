@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ModalController, NavController, NavParams } from '@ionic/angular';
-// import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Profile } from '../../../interfaces/profile'
 import { ProfileService } from '../../../services/profile.service';
 
@@ -22,22 +21,12 @@ export class ProfileEditPage implements OnInit {
 		profileFriends: [],
 	};
 	profileID: "";
-	// profileGroup: FormGroup;
 
   constructor(private modalCtrl: ModalController,
-              // public afAuth: AngularFireAuth,
               private profileService: ProfileService,
               public db: AngularFirestore,
-              // private fb: FormBuilder,
               private nav: NavController,
               private navParams: NavParams){
-
-  	// this.profileGroup = this.fb.group({
-      // profileAlias : ['', Validators.compose([Validators.required])],
-			// profileGender: ['', Validators.compose([Validators.required])],
-			// profileWeight: ['', Validators.compose([Validators.required])],
-			// profileHeight: ['', Validators.compose([Validators.required])],
-   //      });
   }
 
 

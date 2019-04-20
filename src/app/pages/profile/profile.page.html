@@ -8,6 +8,36 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
 
+
+<ion-content padding>
+	<h2>
+		{{this.profile.profileAlias}}  <sub><small><span expand="full" (click)="this.editProfile(this.profile, this.profileId)">edit</span><ion-icon name="create"></ion-icon></small></sub>
+	</h2>	
+	<ion-list>
+		<ion-list-header style="border-bottom: 1px solid grey">
+			<h5> Personal Information</h5>
+		</ion-list-header> 
+		<ion-item>
+		  <ion-label>
+		    Your Initial weight
+		  </ion-label>
+		  {{this.profile.profileWeight}}
+		</ion-item>
+		<ion-item>
+		  <ion-label>
+		    Your Initial height
+		  </ion-label>
+		  {{this.profile.profileHeight}}
+		</ion-item>
+		<ion-item>
+		  <ion-label>
+		    Your calories down so far
+		  </ion-label>
+		  {{this.profile.profileTotalCalory}}
+		</ion-item>
+	</ion-list>
+	<ion-list-header style="border-bottom: 1px solid grey">
+		<h5> Friends</h5>
+	</ion-list-header>
 </ion-content>

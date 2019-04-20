@@ -79,17 +79,18 @@ export class ProfilePage implements OnInit {
 		  	})
   		}
 		if(this.profile.profileAlias ==  ""){
-			this.editProfile(this.profile);
+			this.editProfile(this.profile, this.profileId);
 		}
   	})
   }
 
-  async editProfile(profile:{}) {
+  async editProfile(profile:{}, profileID: string) {
     const modal = await this.modalCtrl.create({
       component: ProfileEditPage,
       backdropDismiss: false,
       componentProps: {
       profile: profile,
+      profileID: profileID,
    }
     });
     return await modal.present();

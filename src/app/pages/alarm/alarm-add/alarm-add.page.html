@@ -1,9 +1,55 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>alarmAdd</ion-title>
+  	<ng-container *ngIf="this.alarmID; else noID">
+  		<ion-title>Edit alarm</ion-title>
+  	</ng-container>
+  	<ng-template #noID>
+  		<ion-title>Add alarm</ion-title>
+  	</ng-template>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+
+	<ion-list lines="full">
+		<ion-item>
+			<ion-input required type="text" placeholder="Title" [(ngModel)]="alarm.alarmTitle"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-input required type="text" placeholder="Time" [(ngModel)]="alarm.alarmTime"></ion-input>
+		</ion-item>
+		<ion-list-header>
+	        Days
+	    </ion-list-header>
+	    	<ion-item>
+			    <ion-label>Monday</ion-label>
+			    <ion-checkbox slot="end" ></ion-checkbox>
+		  	</ion-item>
+		  	<ion-item>
+			    <ion-label>Tuesday</ion-label>
+			    <ion-checkbox slot="end" ></ion-checkbox>
+		  	</ion-item>
+		  	<ion-item>
+			    <ion-label>Wednesday</ion-label>
+			    <ion-checkbox slot="end" ></ion-checkbox>
+		  	</ion-item>
+		  	<ion-item>
+			    <ion-label>Thursday</ion-label>
+			    <ion-checkbox slot="end" ></ion-checkbox>
+		  	</ion-item>
+		  	<ion-item>
+			    <ion-label>Friday</ion-label>
+			    <ion-checkbox slot="end" ></ion-checkbox>
+		  	</ion-item>
+		  	<ion-item>
+			    <ion-label>Saturday</ion-label>
+			    <ion-checkbox slot="end" ></ion-checkbox>
+		  	</ion-item>
+		  	<ion-item>
+			    <ion-label>Sunday</ion-label>
+			    <ion-checkbox slot="end" ></ion-checkbox>
+		  	</ion-item>
+	</ion-list>
+	<ion-button expand="full" (click)="saveTodo()">Save</ion-button>
 
 </ion-content>

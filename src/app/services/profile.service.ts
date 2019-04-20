@@ -45,7 +45,4 @@ export class ProfileService {
   	return this.profilesCollection.add(profile);
   }
 
-  removeProfiel(id) {
-  	return this.profilesCollection.doc(id).delete();
-  }
 }

@@ -9,6 +9,32 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+	<ion-list>
+<!-- 		<ion-item *ngFor="let alarm of alarms">
+	      <table>
+	      	<tr>
+	      		<th><h2>{{alarm.time}} &nbsp;&nbsp;</h2></th>
+	      		<td><table>
+	      			<tr>
+	      				<td>{{alarm.title}}</td>
+	      			</tr>
+	      			<tr>
+	      				<td><sub>{{alarm.days}}</sub></td>
+	      			</tr>
+	      		</table></td>
+	      	</tr>
+	      </table>
+	      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	      <ion-button (click)="edit(alarm)" color="light">edit</ion-button> 
+	      <ion-button (click)="delete(alarm)" color="light">Delete</ion-button>
+	    </ion-item> -->
+	</ion-list>
+
+    <ion-fab vertical ="bottom" horizontal="end" slot="fixed">
+		<ion-fab-button (click)="add()" routerDirection="foward">
+			<ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
 
 </ion-content>

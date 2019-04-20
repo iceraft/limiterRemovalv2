@@ -21,6 +21,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AlarmAddPage]
+  declarations: [AlarmAddPage],
+  entryComponents: [AlarmAddPage],
 })
 export class AlarmAddPageModule {}

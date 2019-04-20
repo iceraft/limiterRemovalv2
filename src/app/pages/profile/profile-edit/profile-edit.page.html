@@ -1,9 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Edit Profile</ion-title>
+    <ion-title>Edit your profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+	<ion-list lines="full">
+		<ion-item>
+			<ion-input required type="text" placeholder="Your Alias" [(ngModel)]="profile.profileAlias"></ion-input>
+		</ion-item>
+		<ion-radio-group radio-group [(ngModel)]="profile.profileGender" name="profile.profileGender" required>
+	      <ion-list-header>
+	        Gender
+	      </ion-list-header>
+	      <ion-item>
+	        <ion-label>Male</ion-label>
+	        <ion-radio value="true"></ion-radio>
+	      </ion-item>
+	      <ion-item>
+	        <ion-label>Female</ion-label>
+	        <ion-radio value="false"></ion-radio>
+	      </ion-item>
+	    </ion-radio-group>
+    	<ion-item>
+			<ion-input required type="text" placeholder="Your weight" [(ngModel)]="profile.profileWeight"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-input required type="text" placeholder="Your height" [(ngModel)]="profile.profileHeight"></ion-input>
+		</ion-item>
+	</ion-list>
+	<ion-button expand="full" (click)="onSubmit()">Save</ion-button>
 </ion-content>

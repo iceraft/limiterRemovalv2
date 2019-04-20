@@ -33,11 +33,10 @@ export class ProfileEditPage implements OnInit {
               private navParams: NavParams){
 
   	// this.profileGroup = this.fb.group({
-   //      	profileAlias: ['', Validators.compose([Validators.required])],
+      // profileAlias : ['', Validators.compose([Validators.required])],
 			// profileGender: ['', Validators.compose([Validators.required])],
 			// profileWeight: ['', Validators.compose([Validators.required])],
 			// profileHeight: ['', Validators.compose([Validators.required])],
-			// profileTotalCalory: ['', Validators.compose([Validators.required])],
    //      });
   }
 
@@ -52,7 +51,7 @@ export class ProfileEditPage implements OnInit {
     onSubmit(){
     this.profileService.updateProfile(this.profiles, this.profileID).then(()=>{
   			console.log("it does");
-  			this.nav.navigateBack('home');
+  			this.nav.navigateBack('profile');
   		})
     this.modalCtrl.dismiss();
   }

@@ -50,6 +50,7 @@ export class AlarmAddPage implements OnInit {
 
 	alarmID: "";
 
+
   constructor(private modalCtrl: ModalController,
               private alarmService: AlarmService,
               public db: AngularFirestore,
@@ -60,9 +61,7 @@ export class AlarmAddPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.alarm);
   	this.alarmID= this.navParams.get('alarmID');
-    console.log(this.alarmID);
   	if(this.alarmID) {
   		this.loadAlarm();
   	}

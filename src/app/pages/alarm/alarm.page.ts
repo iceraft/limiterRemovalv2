@@ -39,4 +39,16 @@ export class AlarmPage implements OnInit {
 		this.alarmService.removeAlarm(item.id);
 	}
 
+	async edit(alarm:{}, alarmID: string) {
+    const modal = await this.modalCtrl.create({
+      component: AlarmAddPage,
+      backdropDismiss: false,
+      componentProps: {
+      profile: alarm,
+      profileID: alarmID,
+   }
+    });
+    return await modal.present();
+   } 
+
 }

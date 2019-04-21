@@ -49,7 +49,6 @@ export class AlarmAddPage implements OnInit {
 	};
 
 	alarmID: "";
-    public testData;
 
   constructor(private modalCtrl: ModalController,
               private alarmService: AlarmService,
@@ -57,20 +56,13 @@ export class AlarmAddPage implements OnInit {
               private nav: NavController,
               private loadingController: LoadingController,
               private navParams: NavParams){
-       this.testData = [
-      {
-        name: "a", 
-        value: true
-      }, 
-      {
-        name: "b", 
-        value: true
-      }]
+
   }
 
   ngOnInit() {
     console.log(this.alarm);
   	this.alarmID= this.navParams.get('alarmID');
+    console.log(this.alarmID);
   	if(this.alarmID) {
   		this.loadAlarm();
   	}
@@ -115,6 +107,7 @@ export class AlarmAddPage implements OnInit {
   			this.nav.navigateBack('/alarm');
   		})
   	}
+    this.modalCtrl.dismiss();
   }
 
 }

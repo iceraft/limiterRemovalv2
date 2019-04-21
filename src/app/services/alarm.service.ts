@@ -36,12 +36,12 @@ export class AlarmService {
   	return this.alarmsCollection.doc<Alarm>(id).valueChanges();
   }
 
-  updateAlarm(profile :Alarm, id: string){
-  	return this.alarmsCollection.doc(id).update(profile);
+  updateAlarm(alarm :Alarm, id: string){
+  	return this.alarmsCollection.doc(id).update(alarm);
   }
 
-  addAlarm(profile: Alarm){
-  	return this.alarmsCollection.add(profile);
+  addAlarm(alarm: Alarm){
+  	return this.alarmsCollection.add(alarm);
   }
 
   removeAlarm(id) {

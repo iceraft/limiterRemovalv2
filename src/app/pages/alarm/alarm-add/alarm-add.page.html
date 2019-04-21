@@ -37,6 +37,16 @@
 	    	<ion-select-option *ngFor="let day of alarm.alarmDays" [selected]="day.value"> {{day.name}} </ion-select-option>
 	  	</ion-select>
 	</div>
-	<ion-button expand="full" (click)="saveAlarm()" style="margin-top: 10%">Save</ion-button>
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<ion-button color="light" expand="block" (click)="this.modalCtrl.dismiss()" style="margin-top: 10%">cancel</ion-button>
+			</ion-col>
+			<ion-col>
+				<ion-button expand="block" (click)="saveAlarm()" style="margin-top: 10%">Save</ion-button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
 
 </ion-content>

@@ -31,6 +31,6 @@ export interface Alarm {
          {
             name: 'Sunday',
             value: boolean,
-         },
+         }
        ]
 }

@@ -10,29 +10,52 @@
 </ion-header>
 
 <ion-content padding>
+	<div style="height:30%; padding: 10px;">
+		<ion-grid>
+		  <ion-row>
+		    <ion-col>
+		       
+		    </ion-col>
+		    <ion-col horizontal="center">
+		      <ion-img src="assets/icon/Alarms.png"></ion-img>
+		    </ion-col>
+		    <ion-col>
+		       
+		    </ion-col>
+		  </ion-row>
+		</ion-grid>
+	</div>
 	<ion-list>
-		<ion-item *ngFor="let alarm of alarms">
-	      <table>
-	      	<tr>
-	      		<th><h2>{{alarm.alarmTime | date:'shortTime' }} &nbsp;&nbsp;</h2></th>
-	      		<td><table>
-	      			<tr>
-	      				<td>{{alarm.alarmTitle}}</td>
-	      			</tr>
-	      			<tr>
-	      				<td><sub> belom siap </sub></td>
-	      			</tr>
-	      		</table></td>
-	      	</tr>
-	      </table>
-	      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	      <ion-button (click)="edit(alarm)" color="light">edit</ion-button> 
-	      <ion-button (click)="delete(alarm)" color="light">Delete</ion-button>
+		<ion-item-sliding *ngFor="let alarm of alarms">
+		  <ion-item-options side="start">
+		    <ion-item-option color="secondary"  (click)="enable(alarm)"><ion-icon name="checkmark"></ion-icon></ion-item-option>
+		  </ion-item-options>
+
+		  <ion-item>
+		      <table>
+		      	<tr>
+		      		<th><h2>{{alarm.alarmTime | date:'HH:mm' }} &nbsp;&nbsp;</h2></th>
+		      		<td><table>
+		      			<tr>
+		      				<td><small><b>{{alarm.alarmTitle}}</b></small></td>
+		      			</tr>
+		      			<tr>
+		      				<td><small> belom siap </small></td>
+		      			</tr>
+		      		</table></td>
+		      	</tr>
+		      </table>
 	    </ion-item>
+
+	     <ion-item-options side="end">
+      	   <ion-item-option color="tertiary" (click)="edit(alarm)"><ion-icon name="create"></ion-icon></ion-item-option>
+      	   <ion-item-option color="danger" (click)="remove(alarm)"><ion-icon name="trash"></ion-icon></ion-item-option>
+    	 </ion-item-options>
+    	</ion-item-sliding>
 	</ion-list>
 
-    <ion-fab vertical ="bottom" horizontal="end" slot="fixed">
-		<ion-fab-button (click)="add()" routerDirection="foward">
+    <ion-fab vertical ="bottom" horizontal="center" slot="fixed">
+		<ion-fab-button color="dark"  (click)="add()" routerDirection="foward">
 			<ion-icon name="add"></ion-icon>
 		</ion-fab-button>
 	</ion-fab>

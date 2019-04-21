@@ -12,20 +12,44 @@ import { AlarmService } from '../../../services/alarm.service';
 export class AlarmAddPage implements OnInit {
 
 	alarm: Alarm = {
+    alarmEnabled: true,
 		alarmCreatedBy: "",
 		alarmTitle: "",
 		alarmTime: "",
-		alarmDays: {
-			mon: false,
-			tue: false,
-			wed: false,
-			thu: false,
-			fri: false,
-			sat: false,
-			sun: false,
-			},
+		alarmDays:  [
+         {
+            name: 'Monday',
+            value: false,
+         },
+         {
+            name: 'Tuesday',
+            value: false,
+         },
+         {
+            name: 'Wednesday',
+            value: false,
+         },
+         {
+            name: 'Thursday',
+            value: false,
+         },
+         {
+            name: 'Friday',
+            value: false,
+         },
+         {
+            name: 'Saturday',
+            value: false,
+         },
+         {
+            name: 'Sunday',
+            value: false,
+         },
+       ]
 	};
+
 	alarmID: "";
+    public testData;
 
   constructor(private modalCtrl: ModalController,
               private alarmService: AlarmService,
@@ -33,11 +57,20 @@ export class AlarmAddPage implements OnInit {
               private nav: NavController,
               private loadingController: LoadingController,
               private navParams: NavParams){
+       this.testData = [
+      {
+        name: "a", 
+        value: true
+      }, 
+      {
+        name: "b", 
+        value: true
+      }]
   }
 
   ngOnInit() {
+    console.log(this.alarm);
   	this.alarmID= this.navParams.get('alarmID');
-  	this.alarm=this.navParams.get('alarm');
   	if(this.alarmID) {
   		this.loadAlarm();
   	}
@@ -72,14 +105,14 @@ export class AlarmAddPage implements OnInit {
   		this.alarmService.updateAlarm(this.alarm, this.alarmID).then(()=>{
   			console.log("it does");
   			loading.dismiss();
-  			this.nav.navigateBack('home');
+  			this.nav.navigateBack('/alarm');
   		})
 
   	} else {
   		this.alarmService.addAlarm(this.alarm).then(()=>{
   			console.log("it does not");
   			loading.dismiss();
-  			this.nav.navigateBack('home');
+  			this.nav.navigateBack('/alarm');
   		})
   	}
   }

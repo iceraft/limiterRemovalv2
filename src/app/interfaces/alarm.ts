@@ -1,14 +1,36 @@
 export interface Alarm {
+   alarmEnabled: boolean,
 	alarmCreatedBy: string,
 	alarmTitle: string,
 	alarmTime: string,
-	alarmDays: {
-		mon: boolean,
-		tue: boolean,
-		wed: boolean,
-		thu: boolean,
-		fri: boolean,
-		sat: boolean,
-		sun: boolean,
-	};
+	alarmDays:  [
+         {
+            name: 'Monday',
+            value: boolean,
+         },
+         {
+            name: 'Tuesday',
+            value: boolean,
+         },
+         {
+            name: 'Wednesday',
+            value: boolean,
+         },
+         {
+            name: 'Thursday',
+            value: boolean,
+         },
+         {
+            name: 'Friday',
+            value: boolean,
+         },
+         {
+            name: 'Saturday',
+            value: boolean,
+         },
+         {
+            name: 'Sunday',
+            value: boolean,
+         },
+       ]
 }

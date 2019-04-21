@@ -11,16 +11,16 @@
 
 <ion-content padding>
 	<ion-list>
-<!-- 		<ion-item *ngFor="let alarm of alarms">
+		<ion-item *ngFor="let alarm of alarms">
 	      <table>
 	      	<tr>
-	      		<th><h2>{{alarm.time}} &nbsp;&nbsp;</h2></th>
+	      		<th><h2>{{alarm.alarmTime | date:'shortTime' }} &nbsp;&nbsp;</h2></th>
 	      		<td><table>
 	      			<tr>
-	      				<td>{{alarm.title}}</td>
+	      				<td>{{alarm.alarmTitle}}</td>
 	      			</tr>
 	      			<tr>
-	      				<td><sub>{{alarm.days}}</sub></td>
+	      				<td><sub> belom siap </sub></td>
 	      			</tr>
 	      		</table></td>
 	      	</tr>
@@ -28,7 +28,7 @@
 	      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	      <ion-button (click)="edit(alarm)" color="light">edit</ion-button> 
 	      <ion-button (click)="delete(alarm)" color="light">Delete</ion-button>
-	    </ion-item> -->
+	    </ion-item>
 	</ion-list>
 
     <ion-fab vertical ="bottom" horizontal="end" slot="fixed">

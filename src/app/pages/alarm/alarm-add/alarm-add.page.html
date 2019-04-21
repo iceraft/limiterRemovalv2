@@ -11,45 +11,32 @@
 
 <ion-content padding>
 
-	<ion-list lines="full">
+	<ion-list lines="full" style="border: 1px solid; border-bottom:0px" padding>
+		<ion-list-header>Alarm info</ion-list-header>
 		<ion-item>
 			<ion-input required type="text" placeholder="Title" [(ngModel)]="alarm.alarmTitle"></ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-input required type="text" placeholder="Time" [(ngModel)]="alarm.alarmTime"></ion-input>
+		  <ion-label>Time</ion-label>
+		  <ion-datetime display-format="HH:mm" [(ngModel)]="alarm.alarmTime" placeholder="00:00"></ion-datetime>
 		</ion-item>
-		<ion-list-header>
-	        Days
-	    </ion-list-header>
-	    	<ion-item>
-			    <ion-label>Monday</ion-label>
-			    <ion-checkbox slot="end" ></ion-checkbox>
-		  	</ion-item>
-		  	<ion-item>
-			    <ion-label>Tuesday</ion-label>
-			    <ion-checkbox slot="end" ></ion-checkbox>
-		  	</ion-item>
-		  	<ion-item>
-			    <ion-label>Wednesday</ion-label>
-			    <ion-checkbox slot="end" ></ion-checkbox>
-		  	</ion-item>
-		  	<ion-item>
-			    <ion-label>Thursday</ion-label>
-			    <ion-checkbox slot="end" ></ion-checkbox>
-		  	</ion-item>
-		  	<ion-item>
-			    <ion-label>Friday</ion-label>
-			    <ion-checkbox slot="end" ></ion-checkbox>
-		  	</ion-item>
-		  	<ion-item>
-			    <ion-label>Saturday</ion-label>
-			    <ion-checkbox slot="end" ></ion-checkbox>
-		  	</ion-item>
-		  	<ion-item>
-			    <ion-label>Sunday</ion-label>
-			    <ion-checkbox slot="end" ></ion-checkbox>
-		  	</ion-item>
-	</ion-list>
-	<ion-button expand="full" (click)="saveTodo()">Save</ion-button>
+    </ion-list>
+    <div style="border: 1px solid; border-top:0px" padding>
+<!--     		<ion-item *ngFor="let day of alarm.alarmDays">
+	        	<ion-label>{{day.name}}</ion-label>
+	        	<ion-checkbox [(ngModel)]="day.value"></ion-checkbox>
+      		</ion-item> -->
+<!--   		<ion-item> -->
+  		<ion-label>Days</ion-label>
+<!--   			<ion-select multiple="true" >	
+	      		<ion-select-option *ngFor="let day of alarm.alarmDays" name="day.name" [(ngModel)]="day.value">{{day.name}}</ion-select-option>
+	    	</ion-select>
+	    </ion-item> -->
+
+		<ion-select multiple="true">
+	    	<ion-select-option *ngFor="let day of alarm.alarmDays" [selected]="day.value"> {{day.name}} </ion-select-option>
+	  	</ion-select>
+	</div>
+	<ion-button expand="full" (click)="saveAlarm()" style="margin-top: 10%">Save</ion-button>
 
 </ion-content>

@@ -1,6 +1,8 @@
 {
   "name": "LimiterRemovalv2",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "8673e28a"
 }

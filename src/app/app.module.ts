@@ -18,6 +18,7 @@ import { FirebaseUIModule, firebase, firebaseui } from 'firebaseui-angular';
 import { environment } from '../environments/environment';
 
 import { ProfileEditPageModule } from './pages/profile/profile-edit/profile-edit.module';
+import { WorkoutAddPageModule } from './pages/workout/workout-add/workout-add.module';
 import { AlarmAddPageModule } from './pages/alarm/alarm-add/alarm-add.module';
 
 
@@ -43,6 +44,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     ProfileEditPageModule,
+    WorkoutAddPageModule,
     AlarmAddPageModule,
     ],
   providers: [

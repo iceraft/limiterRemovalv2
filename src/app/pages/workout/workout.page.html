@@ -14,56 +14,84 @@
 <ion-content padding>
 	<firebase-ui></firebase-ui>
 	<div *ngIf="afAuth.auth.currentUser">
-	<div>
-	<ion-toolbar>
-	<ion-title>Your Workouts</ion-title>	
-	  <ion-buttons (click)="add()" slot="end">
-    	<ion-icon slot="icon-only" name="add"></ion-icon>
-	  </ion-buttons>
-	</ion-toolbar>
- <!--  <div *ngFor="let regiment of regiments">
-    <ion-item *ngIf="regiment.createdBy == afAuth.auth.currentUser.email">
-      <table>
-        <tr>
-          <th><h2> &nbsp;&nbsp;</h2></th>
-          <td><table>
-            <tr>
-              <td>{{regiment.createdBy}}</td>
-            </tr>
-            <tr>
-              <td><sub>{{regiment.session}}</sub></td>
-            </tr>
-          </table></td>
-        </tr>
-      </table>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </ion-item>
-  </div> -->
-	</div>
-    <br>
-    <br>
-	<div>
-	<ion-toolbar>
-	<ion-title>Other Workouts</ion-title>	
-  <!-- <div *ngFor="let regiment of regiments">
-    <ion-item>
-      <table>
-        <tr>
-          <th><h2> &nbsp;&nbsp;</h2></th>
-          <td><table>
-            <tr>
-              <td>{{regiment.createdBy}}</td>
-            </tr>
-            <tr>
-              <td><sub>{{regiment.session}}</sub></td>
-            </tr>
-          </table></td>
-        </tr>
-      </table>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </ion-item>
-  </div> -->
-	</ion-toolbar>
-	</div>
+    <ion-grid  style="height:30%; padding: 10px;">
+      <ion-row>
+        <ion-col horizontal="center">
+
+        </ion-col>
+        <ion-col horizontal="center">
+          <ion-img src="assets/icon/Yoga.png"></ion-img>
+        </ion-col>
+        <ion-col horizontal="center">
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  	<div>
+  	<ion-toolbar>
+  	  <ion-title>Your Workouts</ion-title>	
+  	  <ion-buttons (click)="add()" slot="end">
+      	<ion-icon slot="icon-only" name="add"></ion-icon>
+  	  </ion-buttons>
+  	</ion-toolbar>
+    <ng-container *ngIf="!regiments || regiments == 0" padding>
+      <p style="color:#D3D3D3">There are no workouts yet, add above</p>
+      <div *ngFor="let n of [0,1]" padding>
+        <ion-skeleton-text></ion-skeleton-text>
+        <p>
+          <ion-skeleton-text width="60%"></ion-skeleton-text>
+        </p>
+      </div>
+    </ng-container>
+   <!--  <div *ngFor="let regiment of regiments">
+      <ion-item *ngIf="regiment.createdBy == afAuth.auth.currentUser.email">
+        <table>
+          <tr>
+            <th><h2> &nbsp;&nbsp;</h2></th>
+            <td><table>
+              <tr>
+                <td>{{regiment.createdBy}}</td>
+              </tr>
+              <tr>
+                <td><sub>{{regiment.session}}</sub></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </ion-item>
+    </div> -->
+  	</div>
+      <br>
+      <br>
+  	<div>
+  	<ion-toolbar>
+  	<ion-title>Other Workouts</ion-title>	
+        <ng-container *ngIf="!regiments || regiments == 0">
+            <ion-skeleton-text></ion-skeleton-text>
+            <p>
+              <ion-skeleton-text width="60%"></ion-skeleton-text>
+            </p>
+        </ng-container>
+    <!-- <div *ngFor="let regiment of regiments">
+      <ion-item>
+        <table>
+          <tr>
+            <th><h2> &nbsp;&nbsp;</h2></th>
+            <td><table>
+              <tr>
+                <td>{{regiment.createdBy}}</td>
+              </tr>
+              <tr>
+                <td><sub>{{regiment.session}}</sub></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </ion-item>
+    </div> -->
+  	</ion-toolbar>
+  	</div>
 	</div>
 </ion-content>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 import { AlarmService } from '../../services/alarm.service';
 import { Alarm } from '../../interfaces/alarm';
@@ -15,9 +18,46 @@ import { AlarmAddPage } from './alarm-add/alarm-add.page';
 export class AlarmPage implements OnInit {
 
 	alarms: Alarm [];
+	alarmed: Alarm = {
+    alarmEnabled: true,
+		alarmCreatedBy: "",
+		alarmTitle: "",
+		alarmTime: "",
+		alarmDays:  [
+         {
+            name: 'Monday',
+            value: false,
+         },
+         {
+            name: 'Tuesday',
+            value: false,
+         },
+         {
+            name: 'Wednesday',
+            value: false,
+         },
+         {
+            name: 'Thursday',
+            value: false,
+         },
+         {
+            name: 'Friday',
+            value: false,
+         },
+         {
+            name: 'Saturday',
+            value: false,
+         },
+         {
+            name: 'Sunday',
+            value: false,
+         },
+       ]
+	};
 
   constructor(private alarmService: AlarmService,
-  			  private modalCtrl: ModalController,) {
+  			  private modalCtrl: ModalController,
+          public afAuth: AngularFireAuth,) {
 
 	}
 
@@ -40,7 +80,18 @@ export class AlarmPage implements OnInit {
 	}
 
 	enable(alarmID: string){
-		console.log(alarmID)
+		this.alarmService.getAlarm(alarmID).subscribe(res =>{
+  		this.alarmed = res;});
+		if(this.alarmed.alarmEnabled ==true){
+			this.alarmed.alarmEnabled = false;
+		}
+		else{
+			this.alarmed.alarmEnabled = true;
+			console.log(this.alarmed.alarmEnabled);			
+		}
+		this.alarmService.updateAlarm(this.alarmed, alarmID).then(()=>{
+
+  		})
 	}
 
 	async edit(alarm:{}, alarmID: string) {

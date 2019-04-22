@@ -10,9 +10,6 @@ const routes: Routes = [
 	{ path: 'workout/:id/edit', loadChildren: './pages/workout/workout-edit/workout-edit.module#WorkoutEditPageModule' },
 	{ path: 'workout/:id/play', loadChildren: './pages/workout/workout-play/workout-play.module#WorkoutPlayPageModule' },
 	{ path: 'alarm', loadChildren: './pages/alarm/alarm.module#AlarmPageModule' },
-	{ path: 'alarm/:id', loadChildren: './pages/alarm/alarm.module#AlarmPageModule' },
-	{ path: 'alarm/add', loadChildren: './pages/alarm/alarm-add/alarm-add.module#AlarmAddPageModule' },
-	{ path: 'alarm/:id/add', loadChildren: './pages/alarm/alarm-add/alarm-add.module#AlarmAddPageModule' },
 ];
 
 @NgModule({

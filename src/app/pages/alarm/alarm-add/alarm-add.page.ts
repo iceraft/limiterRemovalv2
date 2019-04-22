@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { ModalController, NavController, NavParams, LoadingController } from '@ionic/angular';
 import { Alarm } from '../../../interfaces/alarm'
 import { AlarmService } from '../../../services/alarm.service';
@@ -46,7 +47,7 @@ export class AlarmAddPage implements OnInit {
             value: false,
          },
        ]
-	};
+	}; 
 
 	alarmID: "";
 
@@ -54,6 +55,7 @@ export class AlarmAddPage implements OnInit {
   constructor(private modalCtrl: ModalController,
               private alarmService: AlarmService,
               public db: AngularFirestore,
+              public afAuth: AngularFireAuth,
               private nav: NavController,
               private loadingController: LoadingController,
               private navParams: NavParams){
@@ -65,7 +67,7 @@ export class AlarmAddPage implements OnInit {
   	if(this.alarmID) {
   		this.loadAlarm();
   	}
-  	console.log(this.alarm);
+
   }
 
   async loadAlarm(){
@@ -93,6 +95,8 @@ export class AlarmAddPage implements OnInit {
   	await loading.present();
   	
   	if (this.alarmID){
+      this.alarm.alarmCreatedBy=this.afAuth.auth.currentUser.uid;
+      console.log(this.alarm.alarmCreatedBy);
   		this.alarmService.updateAlarm(this.alarm, this.alarmID).then(()=>{
   			console.log("it does");
   			loading.dismiss();
@@ -100,6 +104,8 @@ export class AlarmAddPage implements OnInit {
   		})
 
   	} else {
+      this.alarm.alarmCreatedBy=this.afAuth.auth.currentUser.uid;
+      console.log(this.alarm.alarmCreatedBy);      
   		this.alarmService.addAlarm(this.alarm).then(()=>{
   			console.log("it does not");
   			loading.dismiss();

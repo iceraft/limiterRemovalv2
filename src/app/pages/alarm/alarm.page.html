@@ -24,44 +24,45 @@
 	  </ion-row>
 	</ion-grid>
 	<ion-list>
-		<ion-item-sliding *ngFor="let item of alarms">
-		<ng-container *ngIf="item.createdBy == afAuth.auth.currentUser.uid;">
-		  <ion-item-options side="start">
-		    <ion-item-option color="secondary"  (click)="enable(item.id)"><ion-icon name="checkmark"></ion-icon></ion-item-option>
-		  </ion-item-options>
+		<ng-container *ngFor="let item of alarms;">
+			<ng-container *ngIf="!item || item == 0">
+				<p style="color:#D3D3D3">There are no alarms yet, add below</p>
+				<div *ngFor="let n of [0,1,2]" padding>
+					<ion-skeleton-text></ion-skeleton-text>
+					<p>
+						<ion-skeleton-text width="60%"></ion-skeleton-text>
+					</p>
+				</div>
+			</ng-container>
+			<ion-item-sliding *ngIf="item.alarmCreatedBy == this.afAuth.auth.currentUser.uid">
+			  <ion-item-options side="start">
+			    <ion-item-option color="secondary"  (click)="enable(item.id)"><ion-icon name="checkmark"></ion-icon></ion-item-option>
+			  </ion-item-options>
 
-		  <ion-item>
-		      <table>
-		      	<tr>
-		      		<th><h2>{{item.alarmTime | date:'HH:mm' }} &nbsp;&nbsp;</h2></th>
-		      		<td><table>
-		      			<tr>
-		      				<td><small><b>{{item.alarmTitle}}</b></small></td>
-		      			</tr>
-		      			<tr>
-		      				<td><small> belom siap </small></td>
-		      			</tr>
-		      		</table></td>
-		      	</tr>
-		      </table>
-	    </ion-item>
+			  <ion-item>
+			  	  <p style="opacity: 0">{{i}}</p>
+			      <table>
+			      	<tr>
+			      		<th><h2>{{item.alarmTime | date:'HH:mm' }} &nbsp;&nbsp;</h2></th>
+			      		<td><table>
+			      			<tr>
+			      				<td><small><b>{{item.alarmTitle}}</b></small></td>
+			      			</tr>
+			      			<tr>
+			      				<td><font size="-3" *ngFor="let days of item.alarmDays"><ng-container *ngIf="days.value == true">{{days.name}} </ng-container></font></td>
+			      			</tr>
+			      		</table></td>
+			      	</tr>
+			      </table>
+		    </ion-item>
 
-	     <ion-item-options side="end">
-      	   <ion-item-option color="tertiary" (click)="edit(item,item.id)"><ion-icon name="create"></ion-icon></ion-item-option>
-      	   <ion-item-option color="danger" (click)="remove(item)"><ion-icon name="trash"></ion-icon></ion-item-option>
-    	 </ion-item-options>
-    	</ng-container> 
-    	</ion-item-sliding>
-
-    	<ng-container *ngIf="!alarms || alarms == 0">
-			<p style="color:#D3D3D3">There are no alarms yet, add below</p>
-			<div *ngFor="let n of [0,1,2]" padding>
-				<ion-skeleton-text></ion-skeleton-text>
-				<p>
-					<ion-skeleton-text width="60%"></ion-skeleton-text>
-				</p>
-			</div>
+		     <ion-item-options side="end">
+	      	   <ion-item-option color="tertiary" (click)="edit(item,item.id)"><ion-icon name="create"></ion-icon></ion-item-option>
+	      	   <ion-item-option color="danger" (click)="remove(item)"><ion-icon name="trash"></ion-icon></ion-item-option>
+	    	 </ion-item-options>
+	    	</ion-item-sliding>
 		</ng-container>
+
 	</ion-list>
 
     <ion-fab vertical ="bottom" horizontal="center" slot="fixed">

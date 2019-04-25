@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController, NavParams, LoadingController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators , FormArray, FormControl} from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Workout } from '../../../interfaces/workout'
 import { WorkoutService } from '../../../services/workout.service';
 
@@ -67,7 +69,8 @@ export class WorkoutAddPage implements OnInit {
 
   constructor(private modalCtrl: ModalController,
               private workoutService: WorkoutService,
-
+              private afAuth: AngularFireAuth,
+              private db: AngularFirestore,
               private nav: NavController,
               private loadingController: LoadingController,
               private navParams: NavParams){ }
@@ -83,6 +86,30 @@ export class WorkoutAddPage implements OnInit {
   removeControl(control){
     this.workoutForm.removeControl(control.key);
     this.count--;
+  }
+
+  saveAlarm(){
+//hardcode adding regiments
+  //    this.db.collection('regiments').add({
+  //     session: "Stamina Workout",
+  //     createdBy: this.afAuth.auth.currentUser.uid,
+  //     workouts:[] = [
+  //   {
+  //     wName: 'Plank',
+  //     wDuration:'10',
+  //     wTimes:'0',
+  //   },
+  //   {
+  //     wName: 'Bicycle Crunch',
+  //     wDuration:'20',
+  //     wTimes:'0',
+  //   },
+  //   {
+  //     wName: 'Pullup',
+  //     wDuration:'20',
+  //     wTimes:'0',
+  //   },]
+  //   });
   }
 
 }

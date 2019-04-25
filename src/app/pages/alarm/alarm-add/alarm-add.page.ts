@@ -95,8 +95,6 @@ export class AlarmAddPage implements OnInit {
   	await loading.present();
   	
   	if (this.alarmID){
-      this.alarm.alarmCreatedBy=this.afAuth.auth.currentUser.uid;
-      console.log(this.alarm.alarmCreatedBy);
   		this.alarmService.updateAlarm(this.alarm, this.alarmID).then(()=>{
   			console.log("it does");
   			loading.dismiss();
@@ -105,7 +103,6 @@ export class AlarmAddPage implements OnInit {
 
   	} else {
       this.alarm.alarmCreatedBy=this.afAuth.auth.currentUser.uid;
-      console.log(this.alarm.alarmCreatedBy);      
   		this.alarmService.addAlarm(this.alarm).then(()=>{
   			console.log("it does not");
   			loading.dismiss();

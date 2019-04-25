@@ -64,6 +64,7 @@ export class AlarmPage implements OnInit {
 	ngOnInit() {
 		this.alarmService.getAlarms().subscribe(res=>{
 			this.alarms = res;
+      console.log(this.alarms)
 		})
 	}
 
@@ -105,5 +106,9 @@ export class AlarmPage implements OnInit {
     });
     return await modal.present();
    } 
+
+   // filtered(element:any){
+   //   return element ? element.createdBy : this.afAuth.auth.currentUser.uid;
+   // }
 
 }

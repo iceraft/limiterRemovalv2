@@ -17,13 +17,7 @@ export class AlarmAddPage implements OnInit {
     translucent: true
   };
 
-	alarm: Alarm = {
-    alarmEnabled: true,
-		alarmCreatedBy: "",
-		alarmTitle: "",
-		alarmTime: new Date,
-		alarmDays:  []
-	}; 
+	alarm: Alarm; 
 
 	alarmID: "";
   days : any[] =[ {name:'Monday'},{name:'Tuesday'}, {name:'Wednesday'},{name:'Thursday'}, {name:'Friday'},{name:'Saturday'}, {name:'Sunday'}];

@@ -12,44 +12,21 @@ import { AlarmService } from '../../../services/alarm.service';
 })
 export class AlarmAddPage implements OnInit {
 
+  customSelectOptions: any = {
+    header: 'Days',
+    translucent: true
+  };
+
 	alarm: Alarm = {
     alarmEnabled: true,
 		alarmCreatedBy: "",
 		alarmTitle: "",
-		alarmTime: "",
-		alarmDays:  [
-         {
-            name: 'Monday',
-            value: false,
-         },
-         {
-            name: 'Tuesday',
-            value: false,
-         },
-         {
-            name: 'Wednesday',
-            value: false,
-         },
-         {
-            name: 'Thursday',
-            value: false,
-         },
-         {
-            name: 'Friday',
-            value: false,
-         },
-         {
-            name: 'Saturday',
-            value: false,
-         },
-         {
-            name: 'Sunday',
-            value: false,
-         },
-       ]
+		alarmTime: new Date,
+		alarmDays:  []
 	}; 
 
 	alarmID: "";
+  days : any[] =[ {name:'Monday'},{name:'Tuesday'}, {name:'Wednesday'},{name:'Thursday'}, {name:'Friday'},{name:'Saturday'}, {name:'Sunday'}];
 
 
   constructor(private modalCtrl: ModalController,
@@ -67,7 +44,7 @@ export class AlarmAddPage implements OnInit {
   	if(this.alarmID) {
   		this.loadAlarm();
   	}
-
+    console.log(this.days);
   }
 
   async loadAlarm(){

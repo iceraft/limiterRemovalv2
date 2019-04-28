@@ -1,7 +1,7 @@
 export interface Workout {
 	workoutCreatedBy: string,
 	workoutTitle: string,
-	workoutList: [],
+	workoutList: any [],
 	workoutLastEdit: string,
 	workoutCategory: string,
 	workoutTotalCalorie: number,

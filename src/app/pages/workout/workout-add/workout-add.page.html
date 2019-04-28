@@ -22,7 +22,7 @@
 	  		<tr *ngFor="let control of workoutForm.controls | keyvalue">
 	  			<td>
 	  				<ion-select placeholder="Exercise" >
-	      				<ion-select-option *ngFor="let workout of workouts"  value="{{workout.wType}}">{{workout.wName}}</ion-select-option>
+	      				<ion-select-option *ngFor="let workout of workouts"  value="{{workout.wType}}">{{control}}</ion-select-option>
 	      			</ion-select>
 	      		</td>
 	      		<td>

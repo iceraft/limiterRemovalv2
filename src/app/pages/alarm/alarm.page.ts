@@ -22,37 +22,9 @@ export class AlarmPage implements OnInit {
     alarmEnabled: true,
 		alarmCreatedBy: "",
 		alarmTitle: "",
-		alarmTime: "",
-		alarmDays:  [
-         {
-            name: 'Monday',
-            value: false,
-         },
-         {
-            name: 'Tuesday',
-            value: false,
-         },
-         {
-            name: 'Wednesday',
-            value: false,
-         },
-         {
-            name: 'Thursday',
-            value: false,
-         },
-         {
-            name: 'Friday',
-            value: false,
-         },
-         {
-            name: 'Saturday',
-            value: false,
-         },
-         {
-            name: 'Sunday',
-            value: false,
-         },
-       ]
+		alarmTime: new Date,
+		alarmDays:  []
+  
 	};
 
   constructor(private alarmService: AlarmService,

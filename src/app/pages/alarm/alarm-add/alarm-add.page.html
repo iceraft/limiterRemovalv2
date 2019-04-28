@@ -22,15 +22,10 @@
 		</ion-item>
     </ion-list>
     <div style="border: 1px solid; border-top:0px" padding>
-    	 <ion-label>Days</ion-label>
-    		<ion-item *ngFor="let day of alarm.alarmDays">
-	        	<ion-label>{{day.name}}</ion-label>
-	        	<ion-checkbox [(ngModel)]="day.value"></ion-checkbox>
-      		</ion-item>
-      		<!-- it dosent work but it looks so fiinnnne -->
-<!-- 		<ion-select multiple="true" >  
-	    	<ion-select-option *ngFor="let day of alarm.alarmDays" [selected]="day.value"> {{day.name}} </ion-select-option>
-	  	</ion-select> -->
+    	<ion-label>Days</ion-label>
+		<ion-select multiple="true" [(ngModel)] = "alarm.alarmDays" [interfaceOptions]="customSelectOptions">  
+	    	 <ion-select-option *ngFor="let day of days">{{day.name}}</ion-select-option>
+	  	</ion-select>
 	</div>
 	<ion-grid>
 		<ion-row>

@@ -43,13 +43,13 @@
 			  	  <p style="opacity: 0">{{i}}</p>
 			      <table>
 			      	<tr>
-			      		<th><h2>{{item.alarmTime | date:'HH:mm' }} &nbsp;&nbsp;</h2></th>
+			      		<th><h2>{{item.alarmTime}} &nbsp;&nbsp;</h2></th>
 			      		<td><table>
 			      			<tr>
 			      				<td><small><b>{{item.alarmTitle}}</b></small></td>
 			      			</tr>
 			      			<tr>
-			      				<td><font size="-3" *ngFor="let days of item.alarmDays"><ng-container *ngIf="days.value == true">{{days.name}} </ng-container></font></td>
+			      				<td><font size="-3" *ngFor="let day of item.alarmDays" >{{day}} </font></td>
 			      			</tr>
 			      		</table></td>
 			      	</tr>

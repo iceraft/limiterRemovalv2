@@ -17,7 +17,16 @@ export class WorkoutAddPage implements OnInit {
 	worked :Workout= {
 		workoutCreatedBy: "",
 		workoutTitle: "",
-		workoutList: [],
+		workoutList: [{
+      wName: 'Crunch',
+      wType: 'Interval',
+      wValue: 18
+    },
+    {
+      wName: 'Plank',
+      wType: 'Time',
+      wValue: 10
+    }],
 		workoutLastEdit: "",
 		workoutCategory: "",
 		workoutTotalCalorie: 0,
@@ -27,7 +36,12 @@ export class WorkoutAddPage implements OnInit {
 	public workoutForm: FormGroup = new FormGroup({
       workout1: new FormControl("",[Validators.compose([Validators.required])]),
     });
+
+  public binForm: FormGroup = new FormGroup({});
+
     private count: number = 1;
+    private cuont: number = 0;
+
     workoutID: "";
     workouts: any[] = [
     {
@@ -82,6 +96,8 @@ export class WorkoutAddPage implements OnInit {
     this.count++;
     this.workoutForm.addControl('workout' + this.count, new FormControl('', Validators.compose([Validators.required])));
   }
+
+
 
   removeControl(control){
     this.workoutForm.removeControl(control.key);

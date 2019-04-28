@@ -7,6 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { WorkoutService } from '../../services/workout.service';
 import { Workout } from '../../interfaces/workout';
 import { WorkoutAddPage } from './workout-add/workout-add.page';
+import { WorkoutEditPage } from './workout-edit/workout-edit.page';
 
 @Component({
   selector: 'app-workout',
@@ -40,19 +41,15 @@ export class WorkoutPage implements OnInit {
    return await modal.present();
   }
 
-  	remove(item) {
-		this.workoutService.removeWorkout(item.id);
-	}
-
-   async workoutAct(workout : Workout){
+  async remove(item) {
       const actionSheet = await this.actionSheetController.create({
-      header: workout.workoutTitle,
+      header: item.workoutTitle,
       buttons: [{
         text: 'Yes',
         role: 'destructive',
         icon: 'trash',
         handler: () => {
-          console.log('Delete clicked');
+          this.workoutService.removeWorkout(item.id);
         }
       }, {
         text: 'Cancel',
@@ -64,5 +61,18 @@ export class WorkoutPage implements OnInit {
       }]
     });
     await actionSheet.present();
+		
+	}
+
+   async workoutAct(item){
+   const modal = await this.modalCtrl.create({
+      component: WorkoutEditPage,
+      backdropDismiss: false,
+      componentProps: {
+      workout: item,
+      workoutID: item.id,
+   }
+   });
+   return await modal.present();
    }
 }

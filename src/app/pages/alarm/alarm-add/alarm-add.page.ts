@@ -38,7 +38,6 @@ export class AlarmAddPage implements OnInit {
   	if(this.alarmID) {
   		this.loadAlarm();
   	}
-    console.log(this.days);
   }
 
   async loadAlarm(){
@@ -67,7 +66,6 @@ export class AlarmAddPage implements OnInit {
   	
   	if (this.alarmID){
   		this.alarmService.updateAlarm(this.alarm, this.alarmID).then(()=>{
-  			console.log("it does");
   			loading.dismiss();
   			this.nav.navigateBack('/alarm');
   		})
@@ -75,7 +73,6 @@ export class AlarmAddPage implements OnInit {
   	} else {
       this.alarm.alarmCreatedBy=this.afAuth.auth.currentUser.uid;
   		this.alarmService.addAlarm(this.alarm).then(()=>{
-  			console.log("it does not");
   			loading.dismiss();
   			this.nav.navigateBack('/alarm');
   		})

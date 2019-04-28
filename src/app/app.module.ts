@@ -19,6 +19,7 @@ import { environment } from '../environments/environment';
 
 import { ProfileEditPageModule } from './pages/profile/profile-edit/profile-edit.module';
 import { WorkoutAddPageModule } from './pages/workout/workout-add/workout-add.module';
+import { WorkoutEditPageModule } from './pages/workout/workout-edit/workout-edit.module';
 import { AlarmAddPageModule } from './pages/alarm/alarm-add/alarm-add.module';
 
 
@@ -45,6 +46,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     ProfileEditPageModule,
     WorkoutAddPageModule,
+    WorkoutEditPageModule,
     AlarmAddPageModule,
     ],
   providers: [

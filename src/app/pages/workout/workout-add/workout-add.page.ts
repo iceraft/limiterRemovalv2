@@ -26,6 +26,16 @@ export class WorkoutAddPage implements OnInit {
       wName: 'Plank',
       wType: 'Time',
       wValue: 10
+    },
+    {
+      wName: 'Pullup',
+      wType: 'Interval',
+      wValue: 10
+    },
+    {
+      wName: 'Squats',
+      wType: 'Interval',
+      wValue: 10
     }],
 		workoutLastEdit: "",
 		workoutCategory: "",
@@ -104,28 +114,18 @@ export class WorkoutAddPage implements OnInit {
     this.count--;
   }
 
-  saveAlarm(){
+  saveWorkout(){
 //hardcode adding regiments
-  //    this.db.collection('regiments').add({
-  //     session: "Stamina Workout",
-  //     createdBy: this.afAuth.auth.currentUser.uid,
-  //     workouts:[] = [
-  //   {
-  //     wName: 'Plank',
-  //     wDuration:'10',
-  //     wTimes:'0',
-  //   },
-  //   {
-  //     wName: 'Bicycle Crunch',
-  //     wDuration:'20',
-  //     wTimes:'0',
-  //   },
-  //   {
-  //     wName: 'Pullup',
-  //     wDuration:'20',
-  //     wTimes:'0',
-  //   },]
-  //   });
-  }
+    this.worked.workoutCreatedBy=this.afAuth.auth.currentUser.uid;
+    this.worked.workoutLastEdit= new Date().toString();
+    this.worked.workoutCategory = "Moderate";
+    this.worked.workoutTotalCalorie = 164;
+    this.workoutService.addWorkout(this.worked).then(()=>{
+        console.log("it does not");
+        this.modalCtrl.dismiss();
+        this.nav.navigateBack('/workout');
+      })
+    }
+  
 
 }

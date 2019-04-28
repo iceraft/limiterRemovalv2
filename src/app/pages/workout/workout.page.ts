@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ModalController } from '@ionic/angular';
+import { ModalController , ActionSheetController} from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { WorkoutService } from '../../services/workout.service';
@@ -15,12 +15,13 @@ import { WorkoutAddPage } from './workout-add/workout-add.page';
 })
 export class WorkoutPage implements OnInit {
 
-		workouts: Workout [];
+    workouts: Workout [];
 
   constructor(private db: AngularFirestore,
               private modalCtrl: ModalController,
               public afAuth: AngularFireAuth,
               private workoutService: WorkoutService,
+              public actionSheetController: ActionSheetController,
               ) { }
 
   ngOnInit() {
@@ -43,4 +44,25 @@ export class WorkoutPage implements OnInit {
 		this.workoutService.removeWorkout(item.id);
 	}
 
+   async workoutAct(workout : Workout){
+      const actionSheet = await this.actionSheetController.create({
+      header: workout.workoutTitle,
+      buttons: [{
+        text: 'Yes',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          console.log('Delete clicked');
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+   }
 }

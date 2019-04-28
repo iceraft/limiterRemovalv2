@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ActionSheetController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 
@@ -18,18 +18,12 @@ import { AlarmAddPage } from './alarm-add/alarm-add.page';
 export class AlarmPage implements OnInit {
 
 	alarms: Alarm [];
-	alarmed: Alarm = {
-    alarmEnabled: true,
-		alarmCreatedBy: "",
-		alarmTitle: "",
-		alarmTime: new Date,
-		alarmDays:  []
-  
-	};
+	alarm: Alarm ;
 
   constructor(private alarmService: AlarmService,
   			  private modalCtrl: ModalController,
-          public afAuth: AngularFireAuth,) {
+          public afAuth: AngularFireAuth,
+          public actionSheetController: ActionSheetController,) {
 
 	}
 
@@ -48,39 +42,49 @@ export class AlarmPage implements OnInit {
 	    return await modal.present();
   	}
 
-	remove(item) {
-		this.alarmService.removeAlarm(item.id);
+	remove(alarm) {
+		this.alarmService.removeAlarm(alarm.id);
 	}
 
-	enable(alarmID: string){
-		this.alarmService.getAlarm(alarmID).subscribe(res =>{
-  		this.alarmed = res;});
-		if(this.alarmed.alarmEnabled ==true){
-			this.alarmed.alarmEnabled = false;
+	enable(alarm){
+  		console.log(alarm);
+		if(alarm.alarmEnabled ==true){
+			alarm.alarmEnabled = false;
+		}else{
+			alarm.alarmEnabled = true;		
 		}
-		else{
-			this.alarmed.alarmEnabled = true;
-			console.log(this.alarmed.alarmEnabled);			
-		}
-		this.alarmService.updateAlarm(this.alarmed, alarmID).then(()=>{
+		this.alarmService.updateAlarm(alarm, alarm.id);
 
-  		})
 	}
 
-	async edit(alarm:{}, alarmID: string) {
+	async edit(alarm) {
     const modal = await this.modalCtrl.create({
       component: AlarmAddPage,
       backdropDismiss: false,
       componentProps: {
       alarm: alarm,
-      alarmID: alarmID,
+      alarmID: alarm.id,
    }
     });
     return await modal.present();
    } 
 
-   // filtered(element:any){
-   //   return element ? element.createdBy : this.afAuth.auth.currentUser.uid;
-   // }
-
+   async alarmAct(alarm : Alarm){
+      const actionSheet = await this.actionSheetController.create({
+      header: "Are you sure you want to delete " + alarm.alarmTitle,
+      buttons: [{
+        text: 'Yes',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          this.remove(alarm);
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+      }]
+    });
+    await actionSheet.present();
+   }
 }

@@ -34,7 +34,27 @@
       	<ion-icon slot="icon-only" name="add"></ion-icon>
   	  </ion-buttons>
   	</ion-toolbar>
-    <ng-container *ngIf="!regiments || regiments == 0" padding>
+
+    <div *ngFor="let workout of workouts">
+      <ion-item *ngIf="workout.workoutCreatedBy == afAuth.auth.currentUser.uid; else Koko" (click)="workoutAct(workout)" button>
+        <table>
+          <tr>
+            <th><h2> &nbsp;&nbsp;</h2></th>
+            <td><table>
+                <tr>
+                  <td><b>{{workout.workoutTitle}}</b></td>
+                </tr>
+                <tr>
+                  <td><small><i>by {{workout.workoutCreatedBy}}</i></small></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </ion-item>
+    </div>
+
+    <ng-template #Koko padding>
       <p style="color:#D3D3D3">There are no workouts yet, add above</p>
       <div *ngFor="let n of [0,1]" padding>
         <ion-skeleton-text></ion-skeleton-text>
@@ -42,55 +62,41 @@
           <ion-skeleton-text width="60%"></ion-skeleton-text>
         </p>
       </div>
-    </ng-container>
-   <!--  <div *ngFor="let regiment of regiments">
-      <ion-item *ngIf="regiment.createdBy == afAuth.auth.currentUser.email">
-        <table>
-          <tr>
-            <th><h2> &nbsp;&nbsp;</h2></th>
-            <td><table>
-              <tr>
-                <td>{{regiment.createdBy}}</td>
-              </tr>
-              <tr>
-                <td><sub>{{regiment.session}}</sub></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </ion-item>
-    </div> -->
+    </ng-template>
+
   	</div>
       <br>
       <br>
   	<div>
   	<ion-toolbar>
   	<ion-title>Other Workouts</ion-title>	
-        <ng-container *ngIf="!regiments || regiments == 0">
-            <ion-skeleton-text></ion-skeleton-text>
-            <p>
-              <ion-skeleton-text width="60%"></ion-skeleton-text>
-            </p>
-        </ng-container>
-    <!-- <div *ngFor="let regiment of regiments">
-      <ion-item>
-        <table>
-          <tr>
-            <th><h2> &nbsp;&nbsp;</h2></th>
-            <td><table>
-              <tr>
-                <td>{{regiment.createdBy}}</td>
-              </tr>
-              <tr>
-                <td><sub>{{regiment.session}}</sub></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </ion-item>
-    </div> -->
+
+          <div *ngFor="let workout0 of workouts">
+            <ion-item *ngIf="!workout0.workoutCreatedBy == afAuth.auth.currentUser.uid;else kiki">
+              <table>
+                <tr>
+                  <th><h2> &nbsp;&nbsp;</h2></th>
+                  <td><table>
+                    <tr>
+                      <td><b>{{workout0.workoutTitle}}</b></td>
+                    </tr>
+                    <tr>
+                      <td><small><i>by {{workout0.workoutCreatedBy}}</i></small></td>
+                    </tr>
+                  </table></td>
+                </tr>
+              </table>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </ion-item>
+          </div>
+
+          <ng-template #kiki padding>
+              <ion-skeleton-text></ion-skeleton-text>
+              <p>
+                <ion-skeleton-text width="60%"></ion-skeleton-text>
+              </p>
+          </ng-template>
+
   	</ion-toolbar>
   	</div>
 	</div>

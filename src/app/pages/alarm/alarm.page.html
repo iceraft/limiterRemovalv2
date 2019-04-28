@@ -36,7 +36,7 @@
 			</ng-container>
 			<ion-item-sliding *ngIf="item.alarmCreatedBy == this.afAuth.auth.currentUser.uid">
 			  <ion-item-options side="start">
-			    <ion-item-option color="secondary"  (click)="enable(item.id)"><ion-icon name="checkmark"></ion-icon></ion-item-option>
+			    <ion-item-option color="secondary"  (click)="enable(item)"><ion-icon name="checkmark"></ion-icon></ion-item-option>
 			  </ion-item-options>
 
 			  <ion-item>
@@ -57,8 +57,8 @@
 		    </ion-item>
 
 		     <ion-item-options side="end">
-	      	   <ion-item-option color="tertiary" (click)="edit(item,item.id)"><ion-icon name="create"></ion-icon></ion-item-option>
-	      	   <ion-item-option color="danger" (click)="remove(item)"><ion-icon name="trash"></ion-icon></ion-item-option>
+	      	   <ion-item-option color="tertiary" (click)="edit(item)"><ion-icon name="create"></ion-icon></ion-item-option>
+	      	   <ion-item-option color="danger" (click)="alarmAct(item)"><ion-icon name="trash"></ion-icon></ion-item-option>
 	    	 </ion-item-options>
 	    	</ion-item-sliding>
 		</ng-container>

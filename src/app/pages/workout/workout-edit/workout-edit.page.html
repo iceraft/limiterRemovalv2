@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
+  	<ion-button color="dark" slot="start" fill="none" (click)="this.modalCtrl.dismiss()">
+  		<ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
     <ng-container *ngIf="this.workout;">
   		<ion-title>{{this.workout.workoutTitle}}</ion-title>
   	</ng-container>
-  	<ion-button color="light" slot="end" fill="outline" (click)="this.modalCtrl.dismiss()">
-  		back
-    </ion-button>
   </ion-toolbar>
 </ion-header>
 

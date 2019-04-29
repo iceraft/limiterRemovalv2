@@ -30,7 +30,6 @@ export class AlarmPage implements OnInit {
 	ngOnInit() {
 		this.alarmService.getAlarms().subscribe(res=>{
 			this.alarms = res;
-      console.log(this.alarms)
 		})
 	}
 

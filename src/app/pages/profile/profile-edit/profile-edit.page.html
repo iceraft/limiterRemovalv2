@@ -1,6 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Edit your profile</ion-title>
+    <ng-container *ngIf="this.profileID; else noID">
+    	<ion-button color="dark" slot="start" fill="none" (click)="this.modalCtrl.dismiss()">
+  			<ion-icon name="arrow-back"></ion-icon>
+    	</ion-button>
+  		<ion-title >Edit profile</ion-title>
+  	</ng-container>
+  	<ng-template #noID>
+  		<ion-title>First time login</ion-title>
+  	</ng-template>
   </ion-toolbar>
 </ion-header>
 
@@ -29,5 +37,5 @@
 			<ion-input required type="text" placeholder="Your height" [(ngModel)]="profile.profileHeight"></ion-input>
 		</ion-item>
 	</ion-list>
-	<ion-button expand="full" (click)="onSubmit()">Save</ion-button>
+	<ion-button color="dark" expand="full" (click)="onSubmit()">Save</ion-button>
 </ion-content>

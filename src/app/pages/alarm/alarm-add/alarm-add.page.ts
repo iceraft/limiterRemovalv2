@@ -17,7 +17,13 @@ export class AlarmAddPage implements OnInit {
     translucent: true
   };
 
-	alarm: Alarm; 
+	alarm: Alarm ={
+  alarmEnabled: true,
+  alarmCreatedBy: "",
+  alarmTitle: "",
+  alarmTime: new Date,
+  alarmDays:  []
+}
 
 	alarmID: "";
   days : any[] =[ {name:'Monday'},{name:'Tuesday'}, {name:'Wednesday'},{name:'Thursday'}, {name:'Friday'},{name:'Saturday'}, {name:'Sunday'}];
@@ -57,7 +63,7 @@ export class AlarmAddPage implements OnInit {
 
   async saveAlarm(){
   	let loading = await this.loadingController.create({
-        message: 'Adding Your Data..',
+        message: 'Uploading..',
         spinner: 'crescent',
     	duration: 2000
     });

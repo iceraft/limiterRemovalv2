@@ -1,47 +1,69 @@
 <ion-header>
   <ion-toolbar>
+  	<ion-button color="dark" slot="start" fill="none" (click)="this.modalCtrl.dismiss()">
+  		<ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
     <ng-container *ngIf="this.workoutID; else noID">
-  		<ion-title>Edit workout</ion-title>
+  		<ion-title >Edit workout</ion-title>
   	</ng-container>
   	<ng-template #noID>
   		<ion-title>Add workout</ion-title>
   	</ng-template>
-  	<ion-button color="light" slot="end" fill="outline" (click)="this.modalCtrl.dismiss()">
-  		back
-    </ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-	<ion-list>
-		<ion-item>
-	      <ion-label position="floating">Session Title</ion-label>
-	      <ion-input required type="text" [(ngModel)]="worked.workoutTitle"></ion-input>
-	    </ion-item>
-	    <ion-button size="small" expand="block" color="light" (click)="addControl()">Add Exercise</ion-button>
-	</ion-list>
-	<ion-list lines="none">
-	  	<table width="100%">
-	  		<tr *ngFor="let control of workoutForm.controls | keyvalue">
-	  			<td>
-	  				<ion-select placeholder="Exercise" >
-	      				<ion-select-option *ngFor="let workout of workouts"  value="{{workout.wType}}">{{control}}</ion-select-option>
-	      			</ion-select>
-	      		</td>
-	      		<td>
-	      			<ion-item >
-     					<ion-icon (click)="removeControl(control)" name="close-circle">
-     					</ion-icon>
-     				</ion-item>
-     			</td>
-     		</tr>
-     	</table>
-	</ion-list>	
-	<ion-grid>
-		<ion-row>
-			<ion-col>
-				<ion-button expand="block" (click)="saveWorkout()" style="margin-top: 10%">Save</ion-button>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+<ion-content padding>
+
+	<ion-card >
+		<ion-grid  style="height:30%; padding: 10px;">
+			<ion-row>
+				<ion-col horizontal="center">
+
+				</ion-col>
+				<ion-col horizontal="center">
+				<ion-img src="assets/icon/Yoga.png"></ion-img>
+				</ion-col>
+				<ion-col horizontal="center">
+
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+
+		<ion-list lines="full" padding>
+			<ion-list-header>Exercise particulars</ion-list-header>
+			<ion-item  >
+		      <ion-label position="floating">Session Title</ion-label>
+		      <ion-input required type="text" [(ngModel)]="worked.workoutTitle"></ion-input>
+		    </ion-item>
+		</ion-list>
+		<div padding>
+			<ion-button expand="block" color="light" (click)="addControl()">Add Exercise</ion-button>
+		</div>
+
+		<ion-list lines="none" *ngFor="let control of workoutForm.controls | keyvalue" style="border: 1px solid black">
+
+				<table width="100%">
+					<tr>
+						<td>
+							<ion-item >
+								<ion-label position="floating">Exercise</ion-label>
+								<ion-select>
+								<ion-select-option *ngFor="let workout of workouts"  value="{{workout.wType}}">{{workout.wName}}</ion-select-option>
+								</ion-select>
+							</ion-item>
+						<td>
+						<td>
+							<ion-item >
+								<ion-icon slot="end" (click)="removeControl(control)" name="close-circle"></ion-icon>
+							</ion-item>
+						</td>
+					</tr>
+				</table>
+			
+		</ion-list>
+
+	</ion-card>
+
+	<ion-button color="dark" expand="block" (click)="saveWorkout()" style="margin-top: 10%">Save</ion-button>	
+
 </ion-content>

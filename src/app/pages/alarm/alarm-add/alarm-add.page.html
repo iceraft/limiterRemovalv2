@@ -1,42 +1,55 @@
 <ion-header>
   <ion-toolbar>
+  	<ion-button color="dark" slot="start" fill="none" (click)="this.modalCtrl.dismiss()">
+  		<ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
   	<ng-container *ngIf="this.alarmID; else noID">
-  		<ion-title>Edit alarm</ion-title>
+  		<ion-title  slot="middle">Edit alarm</ion-title>
   	</ng-container>
   	<ng-template #noID>
-  		<ion-title>Add alarm</ion-title>
+  		<ion-title >Add alarm</ion-title>
   	</ng-template>
-  	<ion-button color="light" slot="end" fill="outline" (click)="this.modalCtrl.dismiss()">
-  		back
-    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-	<ion-list lines="full" style="border: 1px solid; border-bottom:0px" padding>
-		<ion-list-header>Alarm info</ion-list-header>
-		<ion-item>
-			<ion-input required type="text" placeholder="Title" [(ngModel)]="alarm.alarmTitle"></ion-input>
-		</ion-item>
-		<ion-item>
-		  <ion-label>Time</ion-label>
-		  <ion-datetime display-format="HH:mm" [(ngModel)]="alarm.alarmTime" placeholder="00:00" ></ion-datetime>
-		</ion-item>
-    </ion-list>
-    <div style="border: 1px solid; border-top:0px" padding>
-    	<ion-label>Days</ion-label>
-		<ion-select multiple="true" [(ngModel)] = "alarm.alarmDays" [interfaceOptions]="customSelectOptions">  
-	    	 <ion-select-option *ngFor="let day of days">{{day.name}}</ion-select-option>
-	  	</ion-select>
-	</div>
-	<ion-grid>
-		<ion-row>
-			<ion-col>
-				<ion-button expand="block" (click)="saveAlarm()" style="margin-top: 10%">Save</ion-button>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+	<ion-card padding>
 
+		<ion-grid  style="height:30%; padding: 10px;">
+			<ion-row>
+				<ion-col horizontal="center">
+
+				</ion-col>
+				<ion-col horizontal="center">
+				<ion-img src="assets/icon/Alarms.png"></ion-img>
+				</ion-col>
+				<ion-col horizontal="center">
+
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+
+		<ion-list lines="full" >
+			<ion-list-header>Alarm info</ion-list-header>
+			<ion-item>
+				<ion-label position="floating">Title</ion-label>
+				<ion-input required type="text" [(ngModel)]="alarm.alarmTitle"></ion-input>
+			</ion-item>
+			<ion-item>
+			  <ion-label position="floating">Time</ion-label>
+			  <ion-datetime display-format="HH:mm" [(ngModel)]="alarm.alarmTime"></ion-datetime>
+			</ion-item>
+			<ion-item>
+				<ion-label position="floating">Days</ion-label>
+				<ion-select multiple="true" [(ngModel)] = "alarm.alarmDays">  
+					 <ion-select-option *ngFor="let day of days">{{day.name}}</ion-select-option>
+				</ion-select>
+			</ion-item>
+	  	</ion-list>
+
+  	</ion-card>
+
+	<ion-button color="dark" expand="block" (click)="saveAlarm()" style="margin-top: 10%">Save</ion-button>
 
 </ion-content>

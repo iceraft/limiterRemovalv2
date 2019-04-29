@@ -11,24 +11,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 	<firebase-ui></firebase-ui>
 	<div *ngIf="afAuth.auth.currentUser">
-    <ion-grid  style="height:30%; padding: 10px;">
-      <ion-row>
-        <ion-col horizontal="center">
 
-        </ion-col>
-        <ion-col horizontal="center">
-          <ion-img src="assets/icon/Yoga.png"></ion-img>
-        </ion-col>
-        <ion-col horizontal="center">
+          <ion-img src="assets/else.jpg"></ion-img>
 
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  	<div>
-  	<ion-toolbar>
+  	<div padding>
+  	<ion-toolbar style="border-bottom: 1px solid black">
   	  <ion-title>Your Workouts</ion-title>	
   	  <ion-buttons (click)="add()" slot="end">
       	<ion-icon slot="icon-only" name="add"></ion-icon>
@@ -54,7 +44,7 @@
       </ion-item>
     </div>
 
-    <ng-template #Koko padding>
+<!--     <ng-template #Koko padding>
       <p style="color:#D3D3D3">There are no workouts yet, add above</p>
       <div *ngFor="let n of [0,1]" padding>
         <ion-skeleton-text></ion-skeleton-text>
@@ -62,17 +52,15 @@
           <ion-skeleton-text width="60%"></ion-skeleton-text>
         </p>
       </div>
-    </ng-template>
+    </ng-template> -->
 
   	</div>
-      <br>
-      <br>
-  	<div>
-  	<ion-toolbar>
-  	<ion-title>Other Workouts</ion-title>	
-
+  	<div padding>
+  	<ion-toolbar style="border-bottom: 1px solid black">
+  	   <ion-title >Other Workouts</ion-title>	
+    </ion-toolbar>
           <div *ngFor="let workout0 of workouts">
-            <ion-item *ngIf="!workout0.workoutCreatedBy == afAuth.auth.currentUser.uid;else kiki">
+            <ion-item *ngIf="workout0.workoutCreatedBy != afAuth.auth.currentUser.uid;else kiki">
               <table>
                 <tr>
                   <th><h2> &nbsp;&nbsp;</h2></th>
@@ -89,15 +77,15 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </ion-item>
           </div>
-
+<!-- 
           <ng-template #kiki padding>
               <ion-skeleton-text></ion-skeleton-text>
               <p>
                 <ion-skeleton-text width="60%"></ion-skeleton-text>
               </p>
-          </ng-template>
+          </ng-template> -->
 
-  	</ion-toolbar>
+
   	</div>
 	</div>
 </ion-content>

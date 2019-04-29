@@ -20,7 +20,6 @@ export class WorkoutEditPage implements OnInit {
 
   ngOnInit() {
   		this.loadWorkout();
-  		console.log(this.workout);
   }
 
   async loadWorkout(){
@@ -39,6 +38,8 @@ export class WorkoutEditPage implements OnInit {
  	}
   }
 
-
+  playWorkout(list){
+    
+  }
 
 }

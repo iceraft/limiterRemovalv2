@@ -56,12 +56,10 @@ export class WorkoutPage implements OnInit {
         icon: 'close',
         role: 'cancel',
         handler: () => {
-          console.log('Cancel clicked');
         }
       }]
     });
     await actionSheet.present();
-		
 	}
 
    async workoutAct(item){

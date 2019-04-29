@@ -9,58 +9,25 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- <ion-content>
-	<ion-list>
-		<ion-item>
-	      <ion-label position="floating">Session Title</ion-label>
-	      <ion-input required type="text" [(ngModel)]="worked.workoutTitle"></ion-input>
-	    </ion-item>
-	    <ion-button size="small" expand="block" color="light" (click)="addControl()">Add Exercise</ion-button>
-	</ion-list>
-	<ion-list lines="none">
-	  	<table width="100%">
-	  		<tr *ngFor="let control of workoutForm.controls | keyvalue">
-	  			<td>
-	  				<ion-select placeholder="Exercise" >
-	      				<ion-select-option *ngFor="let workout of workouts"  value="{{workout.wType}}">{{control}}</ion-select-option>
-	      			</ion-select>
-	      		</td>
-	      		<td>
-	      			<ion-item >
-     					<ion-icon (click)="removeControl(control)" name="close-circle">
-     					</ion-icon>
-     				</ion-item>
-     			</td>
-     		</tr>
-     	</table>
-	</ion-list>	
-	<ion-grid>
-		<ion-row>
-			<ion-col>
-				<ion-button expand="block" (click)="playWorkout()" style="margin-top: 10%">Play</ion-button>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
-</ion-content> -->
+<ion-content padding>
+	<ion-card>
+	  <ion-card-header>
+	  		<ion-card-subtitle>{{this.workout.workoutCreatedBy}}</ion-card-subtitle>
+	  </ion-card-header>
+	  <ion-card-content>
 
-<!-- <ion-card>
-  <ion-card-header>
-  	<ng-container *ngIf="this.workout;">
-  		<ion-card-title>{{this.workout.workoutTitle}}</ion-card-title>
-  		<ion-card-subtitle>{{this.workout.workoutCreatedBy}}</ion-card-subtitle>
-  	</ng-container>
-  </ion-card-header>
-
-  <ion-card-content>
- 	<ion-grid>
-		<ion-row>
-			<ion-col>
-				<ion-button color="light" expand="block" (click)="this.modalCtrl.dismiss()" style="margin-top: 10%">cancel</ion-button>
-			</ion-col>
-			<ion-col>
-				<ion-button expand="block" (click)="playWorkout()" style="margin-top: 10%">Play</ion-button>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
-  </ion-card-content>
-</ion-card> -->
+	  	<ion-list *ngFor="let exercise of this.workout.workoutList | keyvalue">
+	  		<ion-item >
+	  			{{exercise.value.wName}}
+		  	</ion-item>	
+		  	 <ion-item >
+	  			{{exercise.value.wType}}
+		  	</ion-item>	
+		  	<ion-item >
+	  			{{exercise.value.wValue}}
+		  	</ion-item>	
+		</ion-list>
+	  </ion-card-content>
+	</ion-card>
+	<ion-button color="dark" expand="block" (click)="playWorkout(this.workout.workoutList)" style="margin-top: 10%">play</ion-button>	
+</ion-content>

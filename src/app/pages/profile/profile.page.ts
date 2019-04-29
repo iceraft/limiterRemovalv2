@@ -61,7 +61,6 @@ export class ProfilePage implements OnInit {
   	this.profileService.getProfile(this.profileId).subscribe(res =>{
   		loading.dismiss();
   		this.profile = res;
-  		console.log(this.profile)
   		if(this.profile == null){
   			this.db.doc(`profiles/`+this.profileId).set({
 				profileAlias:"",

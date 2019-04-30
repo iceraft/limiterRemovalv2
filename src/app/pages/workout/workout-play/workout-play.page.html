@@ -1,9 +1,23 @@
 <ion-header>
   <ion-toolbar>
+  	<ion-button color="dark" slot="start" fill="none" (click)="this.modalCtrl.dismiss()">
+  		<ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
     <ion-title>workoutPlay</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <circle-progress
+  [percent]="85"
+  [radius]="100"
+  [outerStrokeWidth]="16"
+  [innerStrokeWidth]="8"
+  [outerStrokeColor]="'#78C000'"
+  [innerStrokeColor]="'#C7E596'"
+  [animation]="true"
+  [animationDuration]="300">
+  </circle-progress>
 
 </ion-content>

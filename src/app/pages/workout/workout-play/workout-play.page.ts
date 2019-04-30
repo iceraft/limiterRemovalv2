@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController, NavParams,LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-workout-play',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WorkoutPlayPage implements OnInit {
 
-  constructor() { }
+	list:{};
+
+  constructor(
+  				private modalCtrl: ModalController,
+  				private navParams: NavParams,
+  			 ) { }
 
   ngOnInit() {
+
+  	this.list = this.navParams.get('list');
+  	console.log(this.list);
   }
 
 }

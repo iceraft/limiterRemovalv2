@@ -20,8 +20,8 @@ import { environment } from '../environments/environment';
 import { ProfileEditPageModule } from './pages/profile/profile-edit/profile-edit.module';
 import { WorkoutAddPageModule } from './pages/workout/workout-add/workout-add.module';
 import { WorkoutEditPageModule } from './pages/workout/workout-edit/workout-edit.module';
+import { WorkoutPlayPageModule } from './pages/workout/workout-play/workout-play.module';
 import { AlarmAddPageModule } from './pages/alarm/alarm-add/alarm-add.module';
-
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -47,6 +47,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     ProfileEditPageModule,
     WorkoutAddPageModule,
     WorkoutEditPageModule,
+    WorkoutPlayPageModule,
     AlarmAddPageModule,
     ],
   providers: [

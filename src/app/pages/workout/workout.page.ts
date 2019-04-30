@@ -68,7 +68,6 @@ export class WorkoutPage implements OnInit {
       backdropDismiss: false,
       componentProps: {
       workout: item,
-      workoutID: item.id,
    }
    });
    return await modal.present();

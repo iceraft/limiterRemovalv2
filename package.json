@@ -30,6 +30,7 @@
     "firebase": "^5.9.4",
     "firebaseui": "^3.5.2",
     "firebaseui-angular": "^3.4.1",
+    "ng-circle-progress": "^1.4.0",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.29"
   },

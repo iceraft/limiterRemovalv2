@@ -26,7 +26,7 @@
   	</ion-toolbar>
 
     <div *ngFor="let workout of workouts">
-      <ion-item *ngIf="workout.workoutCreatedBy == afAuth.auth.currentUser.uid; else Koko" (click)="workoutAct(workout)" button>
+         <ion-item *ngIf="workout.workoutCreatedBy == afAuth.auth.currentUser.uid; else Koko" (click)="workoutAct(workout)">
         <table>
           <tr>
             <th><h2> &nbsp;&nbsp;</h2></th>
@@ -60,7 +60,7 @@
   	   <ion-title >Other Workouts</ion-title>	
     </ion-toolbar>
           <div *ngFor="let workout0 of workouts">
-            <ion-item *ngIf="workout0.workoutCreatedBy != afAuth.auth.currentUser.uid;else kiki">
+            <ion-item *ngIf="workout0.workoutCreatedBy != afAuth.auth.currentUser.uid;else kiki" (click)="workoutAct(workout0)">
               <table>
                 <tr>
                   <th><h2> &nbsp;&nbsp;</h2></th>

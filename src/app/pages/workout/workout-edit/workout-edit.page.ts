@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController, NavParams, LoadingController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { ModalController, NavParams,LoadingController } from '@ionic/angular';
 
 import { WorkoutService } from '../../../services/workout.service';
+import { WorkoutPlayPage } from '../workout-play/workout-play.page';
 import { Workout } from '../../../interfaces/workout';
 
 @Component({
@@ -11,15 +13,20 @@ import { Workout } from '../../../interfaces/workout';
 })
 export class WorkoutEditPage implements OnInit {
 
-	workout: Workout;
+	workout: Workout ;
 
-  constructor(private navParams: NavParams,
+
+  constructor(
+          private navParams: NavParams,
+          private route:ActivatedRoute,
   			  private workoutService: WorkoutService,
   			  private loadingController: LoadingController,
   			  private modalCtrl: ModalController) { }
 
   ngOnInit() {
-  		this.loadWorkout();
+
+         this.loadWorkout();
+
   }
 
   async loadWorkout(){
@@ -31,15 +38,23 @@ export class WorkoutEditPage implements OnInit {
 
   	await loading.present();
   	
- 	this.workout = this.navParams.get('workout');
+   	this.workout = this.navParams.get('workout');
 
- 	if(this.workout){
- 		loading.dismiss();
- 	}
+   	if(this.workout){
+   		loading.dismiss();
+   	}
   }
 
-  playWorkout(list){
-    
+  async playWorkout(list){
+    const modal = await this.modalCtrl.create({
+      component: WorkoutPlayPage,
+      backdropDismiss: false,
+      componentProps: {
+      list: list,
+    }
+   });
+    return await modal.present();
+
   }
 
 }

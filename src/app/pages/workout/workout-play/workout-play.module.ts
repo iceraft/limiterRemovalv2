@@ -23,15 +23,8 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     NgCircleProgressModule.forRoot({
-      // set defaults here
-      percent: 100,
-      radius: 100,
-      outerStrokeWidth: 16,
-      innerStrokeWidth: 8,
-      outerStrokeColor: "#78C000",
-      innerStrokeColor: "#C7E596",
-      animationDuration: 300,
-    })
+      responsive:true,
+    }),
   ],
   declarations: [WorkoutPlayPage],
   entryComponents: [WorkoutPlayPage],

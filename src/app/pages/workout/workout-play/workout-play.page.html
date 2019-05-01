@@ -3,21 +3,32 @@
   	<ion-button color="dark" slot="start" fill="none" (click)="this.modalCtrl.dismiss()">
   		<ion-icon name="arrow-back"></ion-icon>
     </ion-button>
-    <ion-title>workoutPlay</ion-title>
+    <ion-title>Session Title</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+	<div style="text-align: center; height: 50%; width :100%">
+		<h4>{{name}}</h4>
+		<circle-progress (click) = "timerStart()"
+		[percent]="percent"
+		[maxPercent]="100"
+		[radius]="radius"
+		[showTitle]="false"
+		[showSubtitle]= "false"
+		[showUnits] = "false"
+		[outerStrokeWidth]="16"
+		[outerStrokeColor]="'Black'"
+		[showZeroOuterStroke]="false"
+		[backgroundStroke]="'Gray'"
+		[backgroundStrokeWidth]="3"
+		[outerStrokeGradient]= "true"
+		[outerStrokeGradientStopColor]="'DarkGray'"
+		[showInnerStroke]="false">
+		</circle-progress>
+		<br>
+		<h2>{{time}}"</h2>
 
-  <circle-progress
-  [percent]="85"
-  [radius]="100"
-  [outerStrokeWidth]="16"
-  [innerStrokeWidth]="8"
-  [outerStrokeColor]="'#78C000'"
-  [innerStrokeColor]="'#C7E596'"
-  [animation]="true"
-  [animationDuration]="300">
-  </circle-progress>
+	 </div>
 
 </ion-content>

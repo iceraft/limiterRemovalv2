@@ -23,6 +23,8 @@ import { WorkoutEditPageModule } from './pages/workout/workout-edit/workout-edit
 import { WorkoutPlayPageModule } from './pages/workout/workout-play/workout-play.module';
 import { AlarmAddPageModule } from './pages/alarm/alarm-add/alarm-add.module';
 
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
   signInOptions: [
@@ -53,7 +55,8 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    LocalNotifications,
   ],
   bootstrap: [AppComponent]
 })

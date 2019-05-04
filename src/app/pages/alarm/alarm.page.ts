@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ActionSheetController } from '@ionic/angular';
+import { ModalController, ActionSheetController, Platform, AlertController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-
+import { LocalNotifications, ELocalNotificationTriggerUnit, ILocalNotificationActionType, ILocalNotification } from '@ionic-native/local-notifications/ngx';
+ 
 
 import { AlarmService } from '../../services/alarm.service';
 import { Alarm } from '../../interfaces/alarm';
@@ -20,10 +21,28 @@ export class AlarmPage implements OnInit {
 	alarms: Alarm [];
 	alarm: Alarm ;
 
+
+  scheduled = [];
+
   constructor(private alarmService: AlarmService,
   			  private modalCtrl: ModalController,
           public afAuth: AngularFireAuth,
-          public actionSheetController: ActionSheetController,) {
+          public actionSheetController: ActionSheetController,
+          private plt: Platform, private localNotifications: LocalNotifications, private alertCtrl: AlertController
+          ) 
+  {
+
+              this.plt.ready().then(() => {
+                this.localNotifications.on('click').subscribe(res => {
+                  let msg = res.data ? res.data.mydata : '';
+                  this.showAlert(res.title, res.text, msg);
+                });
+           
+                this.localNotifications.on('trigger').subscribe(res => {
+                  let msg = res.data ? res.data.mydata : '';
+                  this.showAlert(res.title, res.text, msg);
+                });
+              });
 
 	}
 
@@ -31,6 +50,8 @@ export class AlarmPage implements OnInit {
 		this.alarmService.getAlarms().subscribe(res=>{
 			this.alarms = res;
 		})
+
+    this.repeatingDaily(this.alarms);
 	}
 
 	async add() {
@@ -86,4 +107,28 @@ export class AlarmPage implements OnInit {
     });
     await actionSheet.present();
    }
+
+   showAlert(header, sub, msg) {
+    this.alertCtrl.create({
+      header: header,
+      subHeader: sub,
+      message: msg,
+      buttons: ['Ok']
+    }).then(alert => alert.present());
+  }
+
+  repeatingDaily(alarm) {
+    this.localNotifications.schedule({
+      id: 42,
+      title: 'Good Morning',
+      text: 'Code something epic today!',
+      trigger: { every: { hour: 11, minute: 50 } }
+    });
+  }
+
+  getAll() {
+    this.localNotifications.getAll().then((res: ILocalNotification[]) => {
+      this.scheduled = res;
+    })
+  }
 }

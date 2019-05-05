@@ -39,7 +39,7 @@
   	</ion-toolbar>
 
     <div *ngFor="let workout of workouts">
-         <ion-item *ngIf="workout.workoutCreatedBy == afAuth.auth.currentUser.uid; else Koko" (click)="workoutAct(workout)">
+         <ion-item *ngIf="workout.workoutCreatedBy == afAuth.auth.currentUser.uid; else Koko">
         <table>
           <tr>
             <th><h2> &nbsp;&nbsp;</h2></th>
@@ -90,13 +90,6 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </ion-item>
           </div>
-<!-- 
-          <ng-template #kiki padding>
-              <ion-skeleton-text></ion-skeleton-text>
-              <p>
-                <ion-skeleton-text width="60%"></ion-skeleton-text>
-              </p>
-          </ng-template> -->
 
 
   	</div>

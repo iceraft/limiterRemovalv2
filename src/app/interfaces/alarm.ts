@@ -3,5 +3,5 @@ export interface Alarm {
 	alarmCreatedBy: string,
 	alarmTitle: string,
 	alarmTime: Date,
-	alarmDays:  []
+	alarmDays: String[]
 }

@@ -18,8 +18,13 @@ import { AlarmAddPage } from './alarm-add/alarm-add.page';
 })
 export class AlarmPage implements OnInit {
 
+
 	alarms: Alarm [];
 	alarm: Alarm ;
+  fulltime: any;
+  tHour =0;
+  tMinutes=0;
+  show =0;
 
 
   scheduled = [];
@@ -32,26 +37,33 @@ export class AlarmPage implements OnInit {
           ) 
   {
 
-              this.plt.ready().then(() => {
-                this.localNotifications.on('click').subscribe(res => {
-                  let msg = res.data ? res.data.mydata : '';
-                  this.showAlert(res.title, res.text, msg);
-                });
-           
+              this.plt.ready().then(() => {          
                 this.localNotifications.on('trigger').subscribe(res => {
+                if(this.show == 1){
                   let msg = res.data ? res.data.mydata : '';
                   this.showAlert(res.title, res.text, msg);
+                }
+                this.show++;
                 });
               });
-
 	}
 
 	ngOnInit() {
 		this.alarmService.getAlarms().subscribe(res=>{
-			this.alarms = res;
-		})
 
-    this.repeatingDaily(this.alarms);
+			this.alarms = res;
+      this.alarms.forEach(item =>{
+
+        this.alarm = item;
+        if(this.alarm.alarmCreatedBy == this.afAuth.auth.currentUser.uid){
+          if(this.alarm.alarmDays.indexOf("Wednesday")>-1){
+            this.repeatingDaily(this.alarm);
+          }
+        }
+
+      })
+		
+    })    
 	}
 
 	async add() {
@@ -67,14 +79,20 @@ export class AlarmPage implements OnInit {
 	}
 
 	enable(alarm){
-  		console.log(alarm);
 		if(alarm.alarmEnabled ==true){
 			alarm.alarmEnabled = false;
 		}else{
 			alarm.alarmEnabled = true;		
 		}
 		this.alarmService.updateAlarm(alarm, alarm.id);
-
+    this.localNotifications.schedule({
+      id: 1,
+      title: alarm.alarmTitle,
+      text: 'Its Time!',
+      trigger:{in: 5, unit: ELocalNotificationTriggerUnit.SECOND },
+      foreground: true
+    });
+    this.show=0;
 	}
 
 	async edit(alarm) {
@@ -118,11 +136,15 @@ export class AlarmPage implements OnInit {
   }
 
   repeatingDaily(alarm) {
+    this.fulltime = alarm.alarmTime;
+    let timeSplit = this.fulltime.split(':');
+        this.tMinutes = Number(timeSplit[1]);
+        this.tHour = Number(timeSplit[0]);
     this.localNotifications.schedule({
-      id: 42,
-      title: 'Good Morning',
+      id: 1,
+      title: alarm.alarmTitle,
       text: 'Code something epic today!',
-      trigger: { every: { hour: 11, minute: 50 } }
+      trigger:{every: { hour: this.tHour, minute: this.tMinutes },count:1,single:true}
     });
   }
 
@@ -131,4 +153,5 @@ export class AlarmPage implements OnInit {
       this.scheduled = res;
     })
   }
+
 }

@@ -1,24 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 
+import { Playlist } from '../../../interfaces/playlist'
+
+
 @Component({
   selector: 'app-workout-play',
   templateUrl: './workout-play.page.html',
   styleUrls: ['./workout-play.page.scss'],
 })
-export class WorkoutPlayPage implements OnInit {
 
+
+
+export class WorkoutPlayPage implements OnInit {
+  playlit : Playlist;
 	list:[{
-		wName: "You are",
-		wSec: 5
+		name: "You are",
+		time: 5
 	},
 	{
-		wName: "My one",
-		wSec: 5
+		name: "My one",
+		time: 5
 	},
 	{
-		wName: "Desire",
-		wSec: 2
+		name: "Desire",
+		time: 2
 	}];
 
 	time: any ="seconds left";
@@ -33,6 +39,7 @@ export class WorkoutPlayPage implements OnInit {
 	minutes: number=  0;
 	seconds : any =0;
 	name="Workout Name";
+  i=0;
 
 
   constructor(
@@ -43,6 +50,11 @@ export class WorkoutPlayPage implements OnInit {
   ngOnInit() {
 
   	//this.list = this.navParams.get('list');
+    this.list.forEach(item=>{
+        this.playlit = item;
+        console.log(this.playlit);
+      }
+    )
 
   }
 

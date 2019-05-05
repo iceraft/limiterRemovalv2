@@ -24,7 +24,7 @@
 					</p>
 				</div>
 			</ng-container>
-			<ion-item-sliding *ngIf="item.alarmCreatedBy == this.afAuth.auth.currentUser.uid" (click)="enable(item)">
+			<ion-item-sliding *ngIf="item.alarmCreatedBy == this.afAuth.auth.currentUser.uid" >
 			  <ion-item-options side="start">
 			    <ion-item-option color="secondary"  (click)="enable(item)"><ion-icon name="checkmark"></ion-icon></ion-item-option>
 			  </ion-item-options>

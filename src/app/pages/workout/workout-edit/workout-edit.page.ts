@@ -45,11 +45,12 @@ export class WorkoutEditPage implements OnInit {
    	}
   }
 
-  async playWorkout(list){
+  async playWorkout(item,list){
     const modal = await this.modalCtrl.create({
       component: WorkoutPlayPage,
       backdropDismiss: false,
       componentProps: {
+      workout: item,
       list: list,
     }
    });

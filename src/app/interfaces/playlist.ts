@@ -1,4 +1,5 @@
 export interface Playlist{
-  name: string;
-  time: number;
+  wName: string;
+  wType:string;
+  wTime: number;
 }

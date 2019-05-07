@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Playlist } from '../../../interfaces/playlist'
-
+import { Playlist } from '../../../interfaces/playlist';
+import { Workout } from '../../../interfaces/workout'
 
 @Component({
   selector: 'app-workout-play',
@@ -13,19 +15,10 @@ import { Playlist } from '../../../interfaces/playlist'
 
 
 export class WorkoutPlayPage implements OnInit {
-  playlit : Playlist;
-	list:[{
-		name: "You are",
-		time: 5
-	},
-	{
-		name: "My one",
-		time: 5
-	},
-	{
-		name: "Desire",
-		time: 2
-	}];
+  workout : Workout;
+  playlist : Playlist;
+  list: [];
+  typing: boolean = true;
 
 	time: any ="seconds left";
 
@@ -39,27 +32,72 @@ export class WorkoutPlayPage implements OnInit {
 	minutes: number=  0;
 	seconds : any =0;
 	name="Workout Name";
-  i=0;
-
+  i: any =-2;
+  rest: boolean = false;
 
   constructor(
   				private modalCtrl: ModalController,
-  				//private navParams: NavParams,
+  				private navParams: NavParams,
   			 ) { }
 
   ngOnInit() {
 
-  	//this.list = this.navParams.get('list');
-    this.list.forEach(item=>{
-        this.playlit = item;
-        console.log(this.playlit);
-      }
-    )
+    this.workout= this.navParams.get('workout');
+    this.list =  this.navParams.get('list');
+    this.play();
 
   }
 
-  timerStart(){
 
+  play(){
+    
+    this.i++;
+    switch(this.i) { 
+
+       case -1: { 
+          this.name = "Okay Get Ready!";
+          this.timerStart();
+          break; 
+       }
+
+       case 100: { 
+          this.name ="Your DONE";
+          console.log("end");
+          break; 
+       } 
+
+       default: { 
+         if(this.i< this.list.length){
+          this.playlist = this.list[this.i];
+          this.name=this.playlist.wName;
+          if(this.playlist.wType == "Time"){
+            this.typing = true;
+            this.rest= true;
+            this.timerStart();
+          }else{
+            this.rest=true;
+            this.typing = false;
+          }
+         }else{
+           this.i = 99;
+         }
+          break; 
+       } 
+
+    } 
+
+  }
+
+resting(){
+this.typing = true;
+this.name = "resting";
+this.rest= false;
+this.timerStart();
+}
+
+
+  timerStart(){
+    console.log(this.rest);
   	if(this.timer){
   		clearInterval(this.timer);
   	}
@@ -69,8 +107,8 @@ export class WorkoutPlayPage implements OnInit {
   	this.progress = 0;
 
   	let timeSplit = this.fulltime.split(':');
-	this.minutes = timeSplit[1];
-	this.seconds = timeSplit[2];
+  	this.minutes = timeSplit[1];
+  	this.seconds = timeSplit[2];
 
   	let totalSeconds = Math.floor(this.minutes * 60) + parseInt(this.seconds);
   	totalSeconds--;
@@ -86,108 +124,19 @@ export class WorkoutPlayPage implements OnInit {
   		this.progress ++;
 
   		this.time = Math.floor(totalSeconds - this.progress);
-  		if(this.time <= -1 ){
+  		
+      if(this.time <= -1 ){
   			this.time="Done";
+
+        if(this.rest === true){
+          this.resting();
+        }else {
+          this.play();
+        }
+          
   		}
-
   	},1000)
-
   }
 
 }
-
-// import { Component, OnInit } from '@angular/core';
-// import { ModalController, NavParams } from '@ionic/angular';
-
-// @Component({
-//   selector: 'app-workout-play',
-//   templateUrl: './workout-play.page.html',
-//   styleUrls: ['./workout-play.page.scss'],
-// })
-// export class WorkoutPlayPage implements OnInit {
-
-// 	list: [{
-// 		wName: "You are",
-// 		wSec: 5
-// 	},
-// 	{
-// 		wName: "My Fire",
-// 		wSec: 2
-// 	},
-// 	{
-// 		wName: "My One",
-// 		wSec: 5
-// 	}];
-	
-
-// 	time: any ="seconds left";
-
-// 	percent:number = 0;
-// 	radius:number =100;
-// 	// fulltime : any = '00:00:20';
-
-// 	timer: any = false;
-// 	progress: any = 0;
-
-// 	minutes: number=  0;
-// 	seconds : any =0;
-
-// 	i: 0;
-
-// 	name="";
-
-//   constructor(	private modalCtrl: ModalController,
-//   				//private navParams: NavParams,
-//   			 ) { }
-
-//   ngOnInit() {
-
-//   	//this.list = this.navParams.get('list');
-//   	//this.name=this.list[this.i].wName;
-//   	console.log(name);
-//   	console.log(this.list[this.i].wSec);
-//   	console.log(this.list[this.i].wName);
-  	
-//   }
-
-
-//   timerStart(){
-
-//   	if(this.timer){
-//   		clearInterval(this.timer);
-//   	}
-
-//   	this.timer = false;
-//   	this.percent = 0;
-//   	this.progress = 0;
-//   	this.seconds= this.list[this.i].wSec;
-
-// 	// let timeSplit = this.fulltime.split(':');
-// 	// this.minutes = timeSplit[1];
-// 	// this.seconds = timeSplit[2];
-
-//   	let totalSeconds = Math.floor(this.minutes * 60) + parseInt(this.seconds);
-//   	totalSeconds--;
-
-
-//   	this.timer = setInterval(() =>
-//   	{
-//   		if(totalSeconds == this.progress){
-//   			clearInterval(this.timer);
-//   		}
-
-//   		this.percent = Math.floor((this.progress/ totalSeconds) * 100);
-//   		this.progress ++;
-
-//   		this.time = Math.floor(totalSeconds - this.progress);
-//   		if(this.time <= -1 ){
-//   			this.time="Done";
-//   			this.i ++;
-//   		}
-
-//   	},1000)
-
-//   }
-
-// }
 

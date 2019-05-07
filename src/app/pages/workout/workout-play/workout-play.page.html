@@ -3,14 +3,18 @@
   	<ion-button color="dark" slot="start" fill="none" (click)="this.modalCtrl.dismiss()">
   		<ion-icon name="arrow-back"></ion-icon>
     </ion-button>
-    <ion-title>Session Title</ion-title>
+    <ion-title>{{workout.workoutTitle}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-	<div style="text-align: center; height: 50%; width :100%">
-		<h4>{{name}}</h4>
-		<circle-progress (click) = "timerStart()"
+
+
+	
+	<div  style="text-align: center; height: 50%; width :100%">
+	<h4>{{name}}</h4>
+	<ng-container *ngIf="typing==true;else niger">
+		<circle-progress
 		[percent]="percent"
 		[maxPercent]="100"
 		[radius]="radius"
@@ -28,7 +32,15 @@
 		</circle-progress>
 		<br>
 		<h2>{{time}}"</h2>
+	 </ng-container >
 
+	 <ng-template #niger>
+
+	 	<ion-button color="dark" size="large" expand="block" (click)="resting()">Done?</ion-button>
+
+	 </ng-template>
 	 </div>
+	
+	
 
 </ion-content>

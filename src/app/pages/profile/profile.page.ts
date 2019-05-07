@@ -15,14 +15,14 @@ import { ProfileEditPage } from './profile-edit/profile-edit.page';
 export class ProfilePage implements OnInit {
 
 	profile: Profile={
-		profileAlias: "defaultAlias",
-		profileGender: true,
-		profileWeight: 0,
-		profileHeight: 0,
-		profileTotalCalory: 0,
-		profileJoinSince: new Date().getTime(),
-		profileFriends: [],
-	}
+    profileAlias: "defaultAlias",
+    profileGender: true,
+    profileWeight: 0,
+    profileHeight: 0,
+    profileTotalCalory: 0,
+    profileJoinSince: new Date().getTime(),
+    profileFriends: [],
+  };
   gender= "unkown";
 	user ={};
 	profileId= null;
@@ -66,22 +66,8 @@ export class ProfilePage implements OnInit {
   	await loading.present();
   	
   	this.profileService.getProfile(this.profileId).subscribe(res =>{
-  		loading.dismiss();
+      loading.dismiss();
   		this.profile = res;
-  		if(this.profile == null){
-  			this.db.doc(`profiles/`+this.profileId).set({
-				profileAlias:"",
-				profileGender: true,
-				profileWeight: 10,
-				profileHeight: 10,
-				profileTotalCalory: 0,
-				profileJoinSince: new Date().getTime(),
-				profileFriends: [],
-		  	})
-  		}
-		if(this.profile.profileAlias ==  ""){
-			this.editProfile(this.profile, this.profileId);
-		}
   	})
   }
 

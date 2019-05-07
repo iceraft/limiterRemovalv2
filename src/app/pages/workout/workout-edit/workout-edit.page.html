@@ -3,9 +3,6 @@
   	<ion-button color="dark" slot="start" fill="none" (click)="this.modalCtrl.dismiss()">
   		<ion-icon name="arrow-back"></ion-icon>
     </ion-button>
-<!--     <ion-buttons slot="start">
-  		<ion-back-button defaultHref="/workout"></ion-back-button>
-  	</ion-buttons> -->
     <ng-container *ngIf="this.workout;">
   		<ion-title>{{this.workout.workoutTitle}}</ion-title>
   	</ng-container>
@@ -29,5 +26,6 @@
 		</ion-list>
 	  </ion-card-content>
 	</ion-card>
-	<ion-button color="dark" expand="block" (click)="playWorkout(this.workout,this.workout.workoutList)" style="margin-top: 10%">play</ion-button>	
+	<ion-button color="dark" expand="block" (click)="playWorkout(this.workout,this.workout.workoutList)" style="margin-top: 10%">play</ion-button>
+	<ion-button *ngIf="this.var==1" color="danger" expand="block" (click)="delete(this.workout)">delete</ion-button>	
 </ion-content>

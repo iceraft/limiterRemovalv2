@@ -33,10 +33,49 @@
 			<ion-list-header>Exercise particulars</ion-list-header>
 			<ion-item  >
 		      <ion-label position="floating">Session Title</ion-label>
-		      <ion-input required type="text" [(ngModel)]="worked.workoutTitle"></ion-input>
+		      <ion-input required type="text" [(ngModel)]="workout.workoutTitle"></ion-input>
 		    </ion-item>
 		</ion-list>
-		<div padding>
+		<ion-card color="dark">
+			<ion-list color="dark">
+				<ion-item *ngFor="let o of workout.workoutList">
+					<small>Name : {{o.wName}} |Type :{{o.wType}} |Value : {{o.wValue}}</small>
+				</ion-item>
+			</ion-list>
+		</ion-card>	
+		<ion-list lines="full" style="border: 1px solid black" padding>
+		    <ion-item >
+				<ion-label position="floating">Exercise</ion-label>
+				<ion-select (ionChange)="changed(playlist.wName)" [(ngModel)]="playlist.wName">
+				<ion-select-option *ngFor="let item of exercises" >{{item.wName}}</ion-select-option>
+				</ion-select>
+			</ion-item>
+			<ion-item  >
+		      <ion-label position="floating">Type</ion-label>
+		      <ion-input disabled="true" required type="text" [(ngModel)]="playlist.wType"></ion-input>
+		    </ion-item>
+			<ion-item  >
+		      <ion-label position="floating">Amount</ion-label>
+		      <ion-input  required type="text" [(ngModel)]="playlist.wValue"></ion-input>
+		    </ion-item>
+			<div padding>
+			<ion-button expand="block" color="light" (click)="addExercise()">Add Exercise</ion-button>
+			</div>
+		</ion-list>
+
+		
+
+	</ion-card>
+
+	<ion-button color="dark" expand="block" (click)="saveWorkout()" style="margin-top: 10%">Save</ion-button>	
+
+</ion-content>
+
+
+
+
+
+<!-- 	<div padding>
 			<ion-button expand="block" color="light" (click)="addControl()">Add Exercise</ion-button>
 		</div>
 
@@ -60,10 +99,4 @@
 					</tr>
 				</table>
 			
-		</ion-list>
-
-	</ion-card>
-
-	<ion-button color="dark" expand="block" (click)="saveWorkout()" style="margin-top: 10%">Save</ion-button>	
-
-</ion-content>
+		</ion-list> -->

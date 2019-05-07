@@ -23,6 +23,7 @@ export class ProfilePage implements OnInit {
 		profileJoinSince: new Date().getTime(),
 		profileFriends: [],
 	}
+  gender= "unkown";
 	user ={};
 	profileId= null;
 
@@ -46,6 +47,12 @@ export class ProfilePage implements OnInit {
 		  	}
 		}
   	})
+    // if(this.profile.profileGender == true){
+    //   this.gender="Female";
+    // }else{
+    //   this.gender="Male"
+    // }
+
   	
   }
 

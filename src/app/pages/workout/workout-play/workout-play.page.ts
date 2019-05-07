@@ -52,7 +52,6 @@ export class WorkoutPlayPage implements OnInit {
   ngOnInit() {
     this.profileService.getProfile(this.afAuth.auth.currentUser.uid).subscribe(person=>{
       this.profile = person;
-      console.log(this.profile);
     })
     this.workout= this.navParams.get('workout');
     this.list =  this.navParams.get('list');
@@ -64,7 +63,6 @@ export class WorkoutPlayPage implements OnInit {
   play(){
 
     this.i++;
-    console.log(this.i);
     switch(this.i) { 
 
        case -1: { 

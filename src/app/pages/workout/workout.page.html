@@ -39,17 +39,17 @@
   	</ion-toolbar>
 
     <div *ngFor="let workout of workouts">
-         <ion-item *ngIf="workout.workoutCreatedBy == afAuth.auth.currentUser.uid; else Koko" (click)="workoutAct(workout)">
-        <table>
+         <ion-item *ngIf="workout.workoutCreatedBy == afAuth.auth.currentUser.uid; else Koko" (click)="workoutAct(workout,1)">
+        <table> 
           <tr>
             <th><h2> &nbsp;&nbsp;</h2></th>
             <td><table>
                 <tr>
                   <td><b>{{workout.workoutTitle}}</b></td>
                 </tr>
-                <tr>
+<!--                 <tr>
                   <td><small><i>by {{workout.workoutCreatedBy}}</i></small></td>
-              </tr>
+              </tr> -->
             </table></td>
           </tr>
         </table>
@@ -73,7 +73,7 @@
   	   <ion-title >Other Workouts</ion-title>	
     </ion-toolbar>
           <div *ngFor="let workout0 of workouts">
-            <ion-item *ngIf="workout0.workoutCreatedBy != afAuth.auth.currentUser.uid;else kiki" (click)="workoutAct(workout0)">
+            <ion-item *ngIf="workout0.workoutCreatedBy != afAuth.auth.currentUser.uid;else kiki" (click)="workoutAct(workout0,0)">
               <table>
                 <tr>
                   <th><h2> &nbsp;&nbsp;</h2></th>

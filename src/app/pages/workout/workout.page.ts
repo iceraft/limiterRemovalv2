@@ -62,12 +62,13 @@ export class WorkoutPage implements OnInit {
     await actionSheet.present();
 	}
 
-   async workoutAct(item){
+   async workoutAct(item,num){
    const modal = await this.modalCtrl.create({
       component: WorkoutEditPage,
       backdropDismiss: false,
       componentProps: {
       workout: item,
+      var: num,
    }
    });
    return await modal.present();

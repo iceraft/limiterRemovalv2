@@ -14,7 +14,7 @@ import { Workout } from '../../../interfaces/workout';
 export class WorkoutEditPage implements OnInit {
 
 	workout: Workout ;
-
+  var=0;
 
   constructor(
           private navParams: NavParams,
@@ -26,7 +26,7 @@ export class WorkoutEditPage implements OnInit {
   ngOnInit() {
 
          this.loadWorkout();
-
+         this.var = this.navParams.get('var');
   }
 
   async loadWorkout(){
@@ -56,6 +56,11 @@ export class WorkoutEditPage implements OnInit {
    });
     return await modal.present();
 
+  }
+
+  delete(item){
+    this.workoutService.removeWorkout(item.id);
+    this.modalCtrl.dismiss();
   }
 
 }

@@ -13,21 +13,18 @@
 </ion-header>
 
 <ion-content padding>
-	<ion-card>
+	<ion-card color="dark">
 	  <ion-card-header>
-	  		<ion-card-subtitle>{{this.workout.workoutCreatedBy}}</ion-card-subtitle>
+	  		<ion-card-subtitle>Session list:</ion-card-subtitle>
 	  </ion-card-header>
 	  <ion-card-content>
 
 	  	<ion-list *ngFor="let exercise of this.workout.workoutList | keyvalue">
-	  		<ion-item >
+	  		<ion-item color ="dark">
 	  			{{exercise.value.wName}}
 		  	</ion-item>	
 		  	 <ion-item >
-	  			{{exercise.value.wType}}
-		  	</ion-item>	
-		  	<ion-item >
-	  			{{exercise.value.wValue}}
+	  			<p><small>Type:{{exercise.value.wType}}<br>Times:{{exercise.value.wValue}}</small></p>
 		  	</ion-item>	
 		</ion-list>
 	  </ion-card-content>

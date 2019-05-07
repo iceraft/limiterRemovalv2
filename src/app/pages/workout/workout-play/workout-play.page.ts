@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams , NavController } from '@ionic/angular';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
+import { ProfileService } from '../../../services/profile.service';
+
+
+import { ProfilePage } from '../../profile/profile.page'
+import { Profile } from '../../../interfaces/profile';
 import { Playlist } from '../../../interfaces/playlist';
-import { Workout } from '../../../interfaces/workout'
+import { Workout } from '../../../interfaces/workout';
 
 @Component({
   selector: 'app-workout-play',
@@ -15,6 +21,7 @@ import { Workout } from '../../../interfaces/workout'
 
 
 export class WorkoutPlayPage implements OnInit {
+  profile : Profile;
   workout : Workout;
   playlist : Playlist;
   list: [];
@@ -24,24 +31,29 @@ export class WorkoutPlayPage implements OnInit {
 
 	percent:number = 0;
 	radius:number =100;
-	fulltime : any = '00:00:20';
 
 	timer: any = false;
 	progress: any = 0;
+  value =10 ;
 
-	minutes: number=  0;
 	seconds : any =0;
 	name="Workout Name";
   i: any =-2;
   rest: boolean = false;
 
   constructor(
+          private afAuth: AngularFireAuth,
+          private profileService: ProfileService,
   				private modalCtrl: ModalController,
   				private navParams: NavParams,
+          public navCtrl: NavController,
   			 ) { }
 
   ngOnInit() {
-
+    this.profileService.getProfile(this.afAuth.auth.currentUser.uid).subscribe(person=>{
+      this.profile = person;
+      console.log(this.profile);
+    })
     this.workout= this.navParams.get('workout');
     this.list =  this.navParams.get('list');
     this.play();
@@ -50,36 +62,42 @@ export class WorkoutPlayPage implements OnInit {
 
 
   play(){
-    
+
     this.i++;
+    console.log(this.i);
     switch(this.i) { 
 
        case -1: { 
           this.name = "Okay Get Ready!";
-          this.timerStart();
+          this.timerStart(this.value);
           break; 
        }
 
-       case 100: { 
-          this.name ="Your DONE";
-          console.log("end");
+       case 999: { 
+          this.name =this.profile.profileAlias;
+          this.time ="You have completed this session."
           break; 
        } 
 
-       default: { 
+       default: {
          if(this.i< this.list.length){
           this.playlist = this.list[this.i];
           this.name=this.playlist.wName;
-          if(this.playlist.wType == "Time"){
+          this.value=this.playlist.wValue;
+          if(this.playlist.wType == "Time")
+          {
             this.typing = true;
             this.rest= true;
-            this.timerStart();
-          }else{
+            this.timerStart(this.value);
+          }
+          else
+          {
             this.rest=true;
             this.typing = false;
           }
          }else{
-           this.i = 99;
+           this.i = 998;
+           this.play();
          }
           break; 
        } 
@@ -88,15 +106,8 @@ export class WorkoutPlayPage implements OnInit {
 
   }
 
-resting(){
-this.typing = true;
-this.name = "resting";
-this.rest= false;
-this.timerStart();
-}
 
-
-  timerStart(){
+  timerStart(value){
     console.log(this.rest);
   	if(this.timer){
   		clearInterval(this.timer);
@@ -106,30 +117,25 @@ this.timerStart();
   	this.percent = 0;
   	this.progress = 0;
 
-  	let timeSplit = this.fulltime.split(':');
-  	this.minutes = timeSplit[1];
-  	this.seconds = timeSplit[2];
-
-  	let totalSeconds = Math.floor(this.minutes * 60) + parseInt(this.seconds);
-  	totalSeconds--;
+  	this.seconds = value;
 
 
   	this.timer = setInterval(() =>
   	{
-  		if(totalSeconds == this.progress){
+  		if(this.seconds == this.progress){
   			clearInterval(this.timer);
   		}
 
-  		this.percent = Math.floor((this.progress/ totalSeconds) * 100);
+  		this.percent = Math.floor((this.progress/ this.seconds) * 100);
   		this.progress ++;
 
-  		this.time = Math.floor(totalSeconds - this.progress);
+  		this.time = Math.floor(this.seconds - this.progress);
   		
       if(this.time <= -1 ){
   			this.time="Done";
 
         if(this.rest === true){
-          this.resting();
+          this.resting(value);
         }else {
           this.play();
         }
@@ -137,6 +143,24 @@ this.timerStart();
   		}
   	},1000)
   }
+
+resting(value){
+  value = Math.floor(value/2);
+  this.typing = true;
+  this.name = "resting";
+  this.rest= false;
+  this.timerStart(value);
+}
+
+complete(){
+  this.profile.profileTotalCalory = this.profile.profileTotalCalory + this.workout.workoutTotalCalorie;
+  this.profileService.updateProfile(this.profile,this.afAuth.auth.currentUser.uid);
+  this.navCtrl.navigateRoot('profile');
+  this.modalCtrl.dismiss().then(next=>
+    this.modalCtrl.dismiss()
+    );
+}
+
 
 }
 

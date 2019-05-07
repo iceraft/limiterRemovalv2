@@ -28,11 +28,6 @@ export class AppComponent {
       url: '/alarm',
       icon: 'alarm'
     },
-    {
-      title: 'Settings',
-      // url: '/settings',
-      icon: 'settings'
-    }
   ];
   constructor(
     private platform: Platform,
@@ -43,7 +38,12 @@ export class AppComponent {
   ) {
     this.initializeApp();
   }
-    signOut() {
+  
+  refresh(){
+    location.reload();
+  }
+
+  signOut() {
    this.router.navigate(['/']);
    this.afAuth.auth.signOut().then(() => {
       location.reload();

@@ -31,10 +31,10 @@
 	      </ion-item>
 	    </ion-radio-group> -->
     	<ion-item>
-			<ion-input required type="text" placeholder="Your weight" [(ngModel)]="profile.profileWeight"></ion-input>
+			<ion-input required type="number" placeholder="Your weight" [(ngModel)]="profile.profileWeight"></ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-input required type="text" placeholder="Your height" [(ngModel)]="profile.profileHeight"></ion-input>
+			<ion-input required type="number" placeholder="Your height" [(ngModel)]="profile.profileHeight"></ion-input>
 		</ion-item>
 	</ion-list>
 	<ion-button color="dark" expand="full" (click)="onSubmit()">Save</ion-button>

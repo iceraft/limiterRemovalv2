@@ -33,7 +33,7 @@
 			<ion-list-header>Exercise particulars</ion-list-header>
 			<ion-item  >
 		      <ion-label position="floating">Session Title</ion-label>
-		      <ion-input required type="text" [(ngModel)]="workout.workoutTitle"></ion-input>
+		      <ion-input type="text" [(ngModel)]="workout.workoutTitle" required></ion-input>
 		    </ion-item>
 		</ion-list>
 		<ion-card color="dark">
@@ -46,17 +46,17 @@
 		<ion-list lines="full" style="border: 1px solid black" padding>
 		    <ion-item >
 				<ion-label position="floating">Exercise</ion-label>
-				<ion-select (ionChange)="changed(playlist.wName)" [(ngModel)]="playlist.wName">
+				<ion-select (ionChange)="changed(playlist.wName)" [(ngModel)]="playlist.wName" required>
 				<ion-select-option *ngFor="let item of exercises" >{{item.wName}}</ion-select-option>
 				</ion-select>
 			</ion-item>
-			<ion-item  >
+			<ion-item >
 		      <ion-label position="floating">Type</ion-label>
-		      <ion-input disabled="true" required type="text" [(ngModel)]="playlist.wType"></ion-input>
+		      <ion-input disabled="true" type="text" [(ngModel)]="playlist.wType" required></ion-input>
 		    </ion-item>
 			<ion-item  >
 		      <ion-label position="floating">Amount</ion-label>
-		      <ion-input  required type="text" [(ngModel)]="playlist.wValue"></ion-input>
+		      <ion-input  type="number" [(ngModel)]="playlist.wValue" required></ion-input>
 		    </ion-item>
 			<div padding>
 			<ion-button expand="block" color="light" (click)="addExercise()">Add Exercise</ion-button>
